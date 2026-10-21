@@ -184,13 +184,14 @@
       for (let x = settings.spacing / 2; x < w; x += settings.spacing) {
         let mark = 0;
         if (field.mark) {
-          const nx = (x - w * 0.51) / (w * 0.46);
-          const ny = (y - h * 0.46) / (h * 0.39);
-          const radius = Math.hypot(nx, ny);
-          const angle = Math.atan2(ny, nx);
-          const contour = radius * 29 + Math.sin(angle * 3 + radius * 4) * 1.4 + Math.sin(nx * 4 - ny * 3) * 0.6;
-          const envelope = Math.min(1, Math.max(0, (1.02 - radius) * 9)) * Math.min(1, radius * 8);
-          mark = Math.pow(Math.max(0, Math.cos(contour)), 5) * envelope;
+          // The bracket-and-pixel geometry mirrors favicon.svg's 32px viewBox.
+          const size = Math.min(w * 0.96, Math.max(0, h - 64) * 1.12);
+          const mx = (x - (w - size) / 2) / size * 32;
+          const my = (y - (h - 64 - size) / 2) / size * 32;
+          const left = mx >= 7 && mx < 12 && my >= 8 && my < 24 && (mx < 10 || my < 11 || my >= 21);
+          const right = mx >= 20 && mx < 25 && my >= 8 && my < 24 && (mx >= 22 || my < 11 || my >= 21);
+          const center = mx >= 15 && mx < 18 && my >= 14 && my < 17;
+          mark = left || right || center ? 1 : 0;
         }
         cells.push({ x, y, mark, protection: protectionAt(field, x, y), angle: Math.atan2((y - h / 2) / (h / 2), (x - w / 2) / (w / 2)) + Math.PI / 2 });
       }

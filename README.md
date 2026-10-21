@@ -17,7 +17,7 @@ Open `http://127.0.0.1:8877`. No dependencies or build step are needed.
 - `app.js` — story navigation, section tracking, and square pixel effects
 - `trails.js` — tapered section cursor and smooth text-selection paint
 
-The important surfaces follow the cursor. The secondary notebook button uses a clockwise brightness wave. Every surface shares a 2px / 8px square lattice and the same peak illumination. The hero contour study uses the same lattice, keeps its brightest ridges above the hover field, and links to the interactive story. Text, diagram labels, and project illustrations are masked from the decorative pixels. Reduced-motion preferences are supported.
+The important surfaces follow the cursor. The secondary notebook button uses a clockwise brightness wave. Every surface shares a 2px / 8px square lattice and the same peak illumination. The hero favicon mark uses the same lattice, keeps its brightest ridges above the hover field, and links to the interactive story. Text, diagram labels, and project illustrations are masked from the decorative pixels. Reduced-motion preferences are supported.
 
 Hover or focus a story step to change the text and move the diagram marker. Tapping and clicking remain available. There is no separate Next/Again control. The section rail moves one square between active sections with a continuous tapered tail.
 
