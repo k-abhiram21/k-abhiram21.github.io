@@ -42,9 +42,6 @@
     });
   });
 
-  const notebook = document.getElementById('notebook');
-  document.querySelector('a[href="#notebook"]').addEventListener('click', () => { notebook.open = true; });
-
   const sectionLinks = [...document.querySelectorAll('.page-index a')];
   const sections = [...document.querySelectorAll('main > section')];
   const pageIndex = document.querySelector('.page-index');
@@ -277,6 +274,7 @@
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
     const field = { element, canvas, ctx, mode: element.dataset.pixels, mark: element.dataset.pixelMark || null, small: element.classList.contains('button'), hover: false, focus: false, touch: false, amount: 0, x: 0, y: 0, tx: 0, ty: 0, w: 0, h: 0, textBoxes: [], cells: [], dirty: true, visible: true, ink: '#111' };
+    const interactionTarget = element.closest('summary') || element;
     fields.push(field);
     fieldByElement.set(element, field);
     fieldObserver?.observe(element);
@@ -286,28 +284,54 @@
       field.ty = event.clientY - rect.top;
       schedule();
     }
-    element.addEventListener('pointerenter', event => {
+    interactionTarget.addEventListener('pointerenter', event => {
       if (event.pointerType === 'touch') return;
       point(event);
       field.x = field.tx; field.y = field.ty;
       field.hover = true;
       schedule();
     });
-    element.addEventListener('pointermove', point);
-    element.addEventListener('pointerleave', () => { field.hover = false; schedule(); });
-    element.addEventListener('pointerdown', event => {
+    let touchOrigin = null;
+    let touchTimer = 0;
+    function cancelTouch() {
+      clearTimeout(touchTimer);
+      touchTimer = 0;
+      touchOrigin = null;
+      field.touch = false;
+      schedule();
+    }
+    interactionTarget.addEventListener('pointermove', event => {
+      if (event.pointerType === 'touch') {
+        if (touchOrigin && Math.hypot(event.clientX - touchOrigin.x, event.clientY - touchOrigin.y) > 10) cancelTouch();
+        return;
+      }
       point(event);
-      if (event.pointerType === 'touch') { field.touch = true; schedule(); }
     });
-    const release = () => { field.touch = false; schedule(); };
-    element.addEventListener('pointerup', release);
-    element.addEventListener('pointercancel', release);
-    element.addEventListener('focusin', event => {
+    interactionTarget.addEventListener('pointerleave', () => { field.hover = false; schedule(); });
+    interactionTarget.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch') { point(event); return; }
+      cancelTouch();
+      if (event.isPrimary === false) return;
+      point(event);
+      field.x = field.tx; field.y = field.ty;
+      touchOrigin = { x: event.clientX, y: event.clientY };
+      field.touch = true;
+      schedule();
+    }, { passive: true });
+    interactionTarget.addEventListener('pointerup', event => {
+      if (event.pointerType !== 'touch' || !touchOrigin) return;
+      touchOrigin = null;
+      // Hold a quick tap long enough to paint; vertical scrolling cancels it.
+      touchTimer = setTimeout(cancelTouch, reduced.matches ? 100 : 220);
+    }, { passive: true });
+    interactionTarget.addEventListener('pointercancel', cancelTouch, { passive: true });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) cancelTouch(); });
+    interactionTarget.addEventListener('focusin', event => {
       field.focus = event.target.matches(':focus-visible');
       if (field.focus) { field.tx = field.w / 2; field.ty = field.h / 2; }
       schedule();
     });
-    element.addEventListener('focusout', () => { field.focus = false; schedule(); });
+    interactionTarget.addEventListener('focusout', () => { field.focus = false; schedule(); });
     if ('ResizeObserver' in window) new ResizeObserver(() => measure(field)).observe(element);
     measure(field);
   });
