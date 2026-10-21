@@ -46,8 +46,6 @@
   const sections = [...document.querySelectorAll('main > section')];
   const pageIndex = document.querySelector('.page-index');
   const indexRunner = pageIndex.querySelector('.index-runner');
-  let lastIndexScroll = scrollY;
-  let indexSettle = 0;
   function updateIndex() {
     document.documentElement.classList.toggle('has-scrolled', scrollY > innerHeight * 0.65);
     const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || document.querySelector('[data-adaptive].site-header').offsetHeight;
@@ -63,18 +61,8 @@
       if (i === index) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    const start = sectionLinks[index].offsetTop + sectionLinks[index].offsetHeight / 2;
-    const next = sectionLinks[Math.min(index + 1, sectionLinks.length - 1)];
-    const end = next.offsetTop + next.offsetHeight / 2;
-    const progress = index === anchors.length - 1 ? 0 : Math.max(0, Math.min(1, (scrollY - anchors[index]) / (anchors[index + 1] - anchors[index])));
-    indexRunner.style.transform = `translateY(${start + (end - start) * progress - 1.5}px)`;
-    if (scrollY !== lastIndexScroll) {
-      pageIndex.dataset.direction = scrollY > lastIndexScroll ? 'down' : 'up';
-      pageIndex.dataset.moving = 'true';
-      clearTimeout(indexSettle);
-      indexSettle = setTimeout(() => { pageIndex.dataset.moving = 'false'; }, 180);
-    }
-    lastIndexScroll = scrollY;
+    const position = sectionLinks[index].offsetTop + sectionLinks[index].offsetHeight / 2;
+    if (indexRunner.dataset.position !== String(position)) indexRunner.dataset.position = String(position);
   }
   const adaptiveElements = [...document.querySelectorAll('[data-adaptive]')];
   const inverseSurfaces = [...document.querySelectorAll('[data-invert-surface]')];
