@@ -1,12 +1,22 @@
 (() => {
   'use strict';
 
-  // This is illustrative copy. Replace these four entries with a real story later.
+  // A working-note link opens the relevant disclosure before the browser
+  // settles on its fragment, so readers land on the detail they asked for.
+  function openLinkedNote() {
+    const target = document.getElementById(location.hash.slice(1));
+    const note = target?.closest('details');
+    if (note) note.open = true;
+  }
+  openLinkedNote();
+  window.addEventListener('hashchange', openLinkedNote);
+
+  // Four fields show the same approach applied to different kinds of work.
   const story = [
-    { label: 'THE QUESTION', title: 'Connected.<br>Still offline.', description: 'The connection looks healthy, but pages won’t load. Start by finding which part of the path is failing.', status: '01 / OBSERVE', command: 'connection', result: 'established', detail: 'Page request → no response' },
-    { label: 'THE CLUE', title: 'The link works.<br>The name doesn’t.', description: 'An IP address responds. A domain name does not. That comparison narrows the search to name resolution.', status: '02 / ISOLATE', command: 'compare requests', result: 'IP responds', detail: 'Domain lookup → timeout' },
-    { label: 'THE DECISION', title: 'One variable.<br>One useful test.', description: 'Keep the connection unchanged. Test the same domain with another resolver to check the DNS hypothesis.', status: '03 / TEST', command: 'alternate resolver', result: 'testing', detail: 'Same domain. One changed variable.' },
-    { label: 'THE OUTCOME', title: 'A smaller problem.<br>A clearer answer.', description: 'The alternate lookup succeeds. The evidence points to the original DNS path; the next step is to investigate that failure.', status: '04 / UNDERSTAND', command: 'domain lookup', result: 'resolved', detail: 'DNS path isolated → investigate the cause' }
+    { label: 'ROUTING & DECISIONS', title: 'The right topic.<br>The wrong answer?', description: 'A specialist can recognise the topic and still make an answer worse. My routing work asks when another model’s answer is worth using—and when to keep the base response.', status: '01 / ROUTING', command: 'working layer', result: 'Adapter routing', detail: 'A relevant response still needs to be useful.', link: './research.html#routing', linkText: 'Explore routing work' },
+    { label: 'DATA & OBSERVABILITY', title: 'Make the system<br>easier to see.', description: 'StreamWatch began with monitoring an unstructured database. I worked across MongoDB, the application, and a Prometheus–Grafana pipeline to connect activity with a useful view.', status: '02 / DATA', command: 'working layer', result: 'Database observability', detail: 'Data exploration and monitoring in one workspace.', link: './streamwatch.html', linkText: 'Explore StreamWatch' },
+    { label: 'AI & RESEARCH', title: 'A convincing signal.<br>A deeper question.', description: 'A model can agree with its own answers and still be wrong. I helped turn that question into an empirical study of uncertainty-based hallucination detection.', status: '03 / RESEARCH', command: 'working layer', result: 'LLM reliability', detail: 'From measuring uncertainty to evaluating interventions.', link: './research.html', linkText: 'Explore the research' },
+    { label: 'ASSISTIVE VISION', title: 'An idea worth<br>learning hardware for.', description: 'Seeing how partial vision loss can make traffic difficult to notice led me to a helmet camera and cues. I learned Raspberry Pi and computer vision while connecting the software to the hardware.', status: '04 / HARDWARE', command: 'working layer', result: 'Embedded vision', detail: 'HeliVision: an observation becomes a working prototype.', link: './helivision.html', linkText: 'Explore HeliVision' }
   ];
   const stepButtons = [...document.querySelectorAll('.story-steps button')];
   let activeStep = 0;
@@ -26,6 +36,13 @@
     document.getElementById('trace-command').textContent = entry.command;
     document.getElementById('trace-result').textContent = entry.result;
     document.getElementById('trace-detail').textContent = entry.detail;
+    const storyLink = document.getElementById('story-link');
+    storyLink.href = entry.link;
+    storyLink.replaceChildren(document.createTextNode(entry.linkText + ' '));
+    const arrow = document.createElement('span');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '↗';
+    storyLink.append(arrow);
     stepButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
     refreshTextMasks();
   }
@@ -34,7 +51,17 @@
       if (event.pointerType !== 'touch') setStoryStep(index);
     });
     button.addEventListener('focus', () => setStoryStep(index));
-    button.addEventListener('click', () => setStoryStep(index));
+    button.addEventListener('click', () => {
+      setStoryStep(index);
+      // A sticky phone control can remain visible after its headline has scrolled
+      // away. Bring the new explanation back below the controls when tapped.
+      if (!matchMedia('(max-width: 700px)').matches) return;
+      const copy = document.querySelector('.story-copy').getBoundingClientRect();
+      const controls = document.querySelector('.story-controls').getBoundingClientRect();
+      if (copy.top < controls.bottom) {
+        window.scrollBy({ top: copy.top - controls.bottom - 24, behavior: reduced.matches ? 'instant' : 'smooth' });
+      }
+    });
     button.addEventListener('keydown', event => {
       if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
       event.preventDefault();
@@ -53,8 +80,12 @@
     let index = 0;
     while (index < anchors.length - 1 && scrollY + 1 >= anchors[index + 1]) index++;
     if (scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 2) index = anchors.length - 1;
+    const page = document.body.dataset.page;
     document.querySelectorAll('.site-header nav a').forEach(link => {
-      if (link.hash === `#${sections[index].id}`) link.setAttribute('aria-current', 'location');
+      let current = null;
+      if (link.dataset.pageLink === page && !(page === 'home' && ['about', 'contact'].includes(sections[index].id))) current = 'page';
+      if (link.hasAttribute('data-scroll-link') && page === 'home' && link.hash === `#${sections[index].id}`) current = 'location';
+      if (current) link.setAttribute('aria-current', current);
       else link.removeAttribute('aria-current');
     });
     sectionLinks.forEach((link, i) => {
@@ -375,4 +406,23 @@
       event.target.closest('[data-reveal]')?.classList.add('is-visible');
     });
   }
+  // SVG motion is local to visible diagrams; hidden scenes and offscreen pages
+  // do not keep animating. The global reduced-motion rule supplies a still view.
+  if ('IntersectionObserver' in window) {
+    const diagramObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.classList.toggle('is-in-view', entry.isIntersecting));
+    }, { threshold: 0.08 });
+    document.querySelectorAll('[data-motion]').forEach(diagram => diagramObserver.observe(diagram));
+  }
+  document.addEventListener('visibilitychange', () => {
+    document.documentElement.classList.toggle('document-hidden', document.hidden);
+  });
+  function revealLinkedProject() {
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target?.matches('details.project, details.notebook')) return;
+    target.open = true;
+    requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+  }
+  window.addEventListener('hashchange', revealLinkedProject);
+  revealLinkedProject();
 })();
