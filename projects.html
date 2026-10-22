@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="StreamWatch and HeliVision: observability, computer vision, and the engineering decisions behind the projects.">
+    <meta property="og:title" content="Projects — Abhiram">
+    <meta property="og:description" content="StreamWatch and HeliVision: observability, computer vision, and the engineering decisions behind the projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://k-abhiram21.github.io/projects.html">
+    <meta name="theme-color" content="#f1f1f1">
+    <script>
+      (() => {
+      let theme;
+      try { theme = localStorage.getItem('portfolio-theme'); } catch {}
+      document.documentElement.dataset.theme = theme === 'dark' || theme === 'light'
+      ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+    </script>
+    <title>Projects — Abhiram</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="./styles.css?v=20261022.7">
+    <script src="./app.js?v=20261022.7" defer></script>
+    <script src="./trails.js?v=20261022.7" defer></script>
+  </head>
+  <body data-page="projects">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-adaptive>
+      <a class="wordmark" href="./index.html#top" aria-label="Abhiram, home">ABHIRAM<span class="brand-pixel" aria-hidden="true"></span></a>
+      <nav aria-label="Main navigation">
+        <a class="home-link" data-page-link="home" href="./index.html#top">Home</a><a data-page-link="projects" href="./projects.html">Projects</a><a data-page-link="research" href="./research.html">Research</a><a data-scroll-link href="./index.html#about">About</a><a data-scroll-link href="./index.html#contact">Contact</a>
+      </nav>
+      <div class="header-tools">
+        <a class="profile-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" aria-label="Abhiram on GitHub">GitHub <span aria-hidden="true">↗</span></a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span></button>
+      </div>
+    </header>
+    <a class="identity-rail" href="./index.html#top" aria-label="Abhiram, home">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M4 9h10v3H7v24h7v3H4zm30 0h10v30H34v-3h7V12h-7zM21 21h6v6h-6z" fill="currentColor"/>
+      </svg>
+      <span aria-hidden="true">ABHIRAM / WORK &amp; THINKING</span></a>
+    <aside class="page-index" aria-label="Page sections">
+      <a href="#top" aria-label="Overview" data-label="Overview" aria-current="location"><span>01</span></a><a href="#streamwatch" aria-label="StreamWatch" data-label="StreamWatch"><span>02</span></a><a href="#helivision" aria-label="HeliVision" data-label="HeliVision"><span>03</span></a>
+      <svg class="index-trail" aria-hidden="true">
+        <defs>
+          <linearGradient id="index-tail" gradientUnits="userSpaceOnUse" x1="0" x2="0"><stop offset="0" stop-color="white" stop-opacity=".8"/><stop offset="1" stop-color="white" stop-opacity=".08"/></linearGradient>
+        </defs>
+        <path fill="url(#index-tail)"/>
+      </svg>
+      <i class="index-runner" aria-hidden="true"></i>
+    </aside>
+    <a class="fixed-top" href="#top" aria-label="Back to top" data-adaptive><span aria-hidden="true">↑</span><small aria-hidden="true">TOP</small></a>
+    <main id="main">
+      <section class="section page-intro" id="top">
+        <p class="breadcrumb">
+          <a href="./index.html">Home</a><span>/ Projects</span>
+        </p>
+        <p class="eyebrow">
+          BUILDING &amp; DEBUGGING
+        </p>
+        <h1>
+          Understand it.<br>Make it <em>work.</em>
+        </h1>
+        <p class="page-description">
+          From a MongoDB monitoring stack to an unfamiliar embedded platform, I enjoy connecting the pieces and following the behaviour through the whole system.
+        </p>
+        <div class="chapter-links">
+          <a href="#streamwatch">01 / StreamWatch ↓</a><a href="#helivision">02 / HeliVision ↓</a>
+        </div>
+      </section>
+      <section class="section collection-section" id="streamwatch">
+        <div class="section-topline">
+          <span><b>02</b> OBSERVABILITY</span>
+        </div>
+        <div class="case-preview" data-reveal>
+          <div class="case-preview-copy">
+            <p class="eyebrow">
+              STREAMWATCH
+            </p>
+            <h2>
+              Unstructured data.<br>A clearer view.
+            </h2>
+            <p>
+              How do you monitor a MongoDB application and make its state understandable? StreamWatch brings metrics, Grafana panels, and AI-assisted querying into one workspace.
+            </p>
+            <p class="role-line">
+              Focus: monitoring, instrumentation &amp; integration
+            </p>
+            <a class="button solid pixel-surface" data-invert-surface href="./streamwatch.html" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore StreamWatch<span aria-hidden="true">↗</span></span></a>
+          </div>
+          <div class="case-figure pixel-surface" data-pixels="follow">
+            <canvas aria-hidden="true"></canvas>
+            <svg class="motion-diagram stream-map" data-motion data-pixel-occluder viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
+              <path class="flow-line" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+              <path class="flow-packet" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+              <rect class="flow-node" x="28" y="73" width="130" height="70"/><text class="fig-name" x="93" y="105">React</text><text class="fig-small" x="93" y="126">workspace</text>
+              <rect class="flow-node" x="222" y="73" width="140" height="70"/><text class="fig-name" x="292" y="105">FastAPI</text><text class="fig-small" x="292" y="126">application</text>
+              <rect class="flow-node" x="430" y="73" width="145" height="70"/><text class="fig-name" x="502" y="105">MongoDB</text><text class="fig-small" x="502" y="126">document data</text>
+              <rect class="flow-node" x="222" y="213" width="140" height="70"/><text class="fig-name" x="292" y="247">Prometheus</text><text class="fig-small" x="292" y="267">metrics</text>
+              <rect class="flow-node" x="430" y="213" width="145" height="70"/><text class="fig-name" x="502" y="247">Grafana</text><text class="fig-small" x="502" y="267">dashboards</text>
+              <path class="return-path" d="M502 284v41H93V144"/><path class="flow-packet return-packet" d="M502 284v41H93V144"/>
+              <text class="fig-label" x="310" y="31" text-anchor="middle">DATA + OBSERVABILITY</text><text class="fig-small" x="306" y="348">Panels return to the workspace</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+      <section class="section collection-section" id="helivision">
+        <div class="section-topline">
+          <span><b>03</b> ASSISTIVE VISION</span>
+        </div>
+        <div class="case-preview reverse" data-reveal>
+          <div class="case-preview-copy">
+            <p class="eyebrow">
+              HELIVISION
+            </p>
+            <h2>
+              An observation.<br>A new way to build.
+            </h2>
+            <p>
+              Seeing how partial vision loss can make approaching traffic difficult to notice led me to a helmet-mounted camera and cues. I proposed the idea and led the software, learning Raspberry Pi and computer vision along the way.
+            </p>
+            <p class="role-line">
+              Concept &amp; lead software · shared hardware work
+            </p>
+            <a class="button solid pixel-surface" data-invert-surface href="./helivision.html" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore HeliVision<span aria-hidden="true">↗</span></span></a>
+          </div>
+          <div class="case-figure pixel-surface" data-pixels="follow">
+            <canvas aria-hidden="true"></canvas>
+            <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+              <defs>
+                <clipPath id="visor-projects-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
+              </defs>
+              <path class="device-shell" d="M151 153C151 74 219 51 300 51S449 74 449 153L462 238Q446 324 300 344Q154 324 138 238Z"/>
+              <path class="visor-glass" d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/>
+              <g clip-path="url(#visor-projects-helmet)">
+                <path class="visor-scan" d="M164 195H435"/><path class="visor-guide" d="M232 143v122M368 143v122"/>
+              </g>
+              <rect class="pi-board" x="259" y="35" width="82" height="29" rx="2"/><path class="board-detail" d="M269 42h17v14h-17m25-12h36m-36 8h36"/>
+              <rect class="camera-module" x="282" y="153" width="36" height="26"/><circle class="camera-lens" cx="300" cy="166" r="8"/>
+              <g class="oled-module">
+                <rect x="271" y="252" width="58" height="34" rx="1"/><path d="M300 258v22M277 269h46"/><rect class="oled-cue cue-one" x="283" y="260" width="5" height="5"/><rect class="oled-cue cue-two" x="310" y="274" width="5" height="5"/>
+              </g>
+              <path class="diagram-leader" d="M281 166H87v-28M329 272h145v81h-99M341 49h126v-18"/>
+              <text class="fig-label" x="49" y="124">CAMERA</text><text class="fig-label" x="300" y="376" text-anchor="middle">OLED / LOWER VISOR</text><text class="fig-label" x="405" y="21">RASPBERRY PI</text>
+              <path class="helmet-chin" d="M219 309h162M243 319h114"/>
+            </svg>
+          </div>
+        </div>
+        <div class="next-page">
+          <span>Another part of the work</span><a href="./research.html">Questions about AI reliability <span aria-hidden="true">↗</span></a>
+        </div>
+        <footer class="site-footer">
+          <a href="./index.html#top">ABHIRAM <span aria-hidden="true">↑</span></a><span>Systems, software &amp; AI research</span><a href="./index.html#contact">Get in touch <span aria-hidden="true">↗</span></a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
