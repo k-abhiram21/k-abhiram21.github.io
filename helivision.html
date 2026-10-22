@@ -20,9 +20,9 @@
     <title>HeliVision — Abhiram</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="./styles.css?v=20261022.7">
-    <script src="./app.js?v=20261022.7" defer></script>
-    <script src="./trails.js?v=20261022.7" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261023.3">
+    <script src="./app.js?v=20261023.3" defer></script>
+    <script src="./trails.js?v=20261023.1" defer></script>
   </head>
   <body data-page="projects">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -116,9 +116,9 @@
             Camera detections become display positions and directional audio. The OLED sits at the lower edge of the visor.
           </p>
         </div>
-        <div class="case-figure helmet-stage pixel-surface" data-reveal data-pixels="follow">
+        <div class="case-figure helmet-stage pixel-surface" data-reveal data-pixels="follow" data-pixel-scroll>
           <canvas aria-hidden="true"></canvas>
-          <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+          <svg class="motion-diagram helmet-front" data-motion data-pixel-art viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
             <defs>
               <clipPath id="visor-case-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
             </defs>
@@ -194,7 +194,8 @@
           </div>
         </div>
         <details class="technical-note">
-          <summary>
+          <summary class="pixel-surface" data-pixels="follow" data-pixel-strength="0.65">
+            <canvas aria-hidden="true"></canvas>
             Inside the implementation <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">

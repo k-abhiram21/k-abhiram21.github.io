@@ -66,6 +66,7 @@ button:focus:not(:focus-visible){outline:none}
 h2{font-size:clamp(36px,3.7vw,52px);font-weight:550;letter-spacing:-.045em;line-height:1.15}
 .pixel-surface{position:relative;isolation:isolate;overflow:hidden}
 .pixel-surface>canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+:root[data-theme="dark"] .pixel-surface>canvas{opacity:.865}
 .button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;min-width:180px;padding:17px 22px;border:1px solid var(--ink);background:transparent;font-size:13px;font-weight:600}
 .button>span{display:flex;align-items:center;justify-content:space-between;gap:34px}
 .button>span>span{font-size:19px;line-height:1;transition:transform .2s var(--ease)}
@@ -572,3 +573,57 @@ h1 em{letter-spacing:-.025em;margin-left:.025em}
 @media(max-width:700px){.signal-diagram{height:230px}}
 .motion-diagram :is(path,rect,circle){vector-effect:non-scaling-stroke}
 @media(max-width:700px){.motion-diagram .flow-packet{stroke-width:1.8px}}
+
+/* A project notebook replaces the oversized logo in the introduction. */
+.hero{min-height:0;padding-top:120px;padding-bottom:54px;overflow:visible}
+.notebook-opening{display:grid;grid-template-columns:1.65fr 1fr;gap:22px 7%;align-items:start}
+.notebook-opening .hero-intro{grid-column:1/-1;flex-direction:row;align-items:center;gap:18px;margin:0}
+.notebook-opening .hero-intro>span{font-size:12px}
+.notebook-opening h1{font-size:clamp(56px,5.3vw,84px);line-height:1.08;letter-spacing:-.055em}
+.notebook-introduction{max-width:36ch;font-size:17px;line-height:1.85;color:var(--muted);padding-bottom:7px}
+.hero-desk{display:grid;grid-template-columns:1fr 1.65fr;gap:9%;margin-top:32px;align-items:start}
+.hero-projects{min-width:0;padding-top:4px}
+.hero-projects button{position:relative;display:block;text-align:left;width:100%;min-height:86px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:18px 0}
+.hero-projects button>span{display:block;font-size:19px;letter-spacing:-.025em}
+.hero-projects button>small{display:block;font-size:12px;line-height:1.8;color:var(--muted);margin-top:6px}
+.hero-projects button[aria-pressed="true"]>span::before{content:'→';display:inline-block;margin-right:12px}
+.hero-projects button:focus-visible{outline-offset:5px}
+.hero-all-work{margin-top:22px;font-size:12px;min-height:44px}
+.hero-note-space{min-width:0;padding:10px 6px 10px 4px}
+.hero-note{--note-angle:-1.25deg;display:grid;grid-template-columns:18px 1fr;gap:26px;min-height:355px;padding:32px 32px 30px 22px;background:var(--panel);transform:rotate(var(--note-angle));transform-origin:center;transition:transform .45s var(--ease);overflow:hidden}
+.note-binding{display:flex;flex-direction:column;align-items:center;justify-content:space-between;border-right:1px solid var(--line);padding:6px 0 10px}
+.note-binding i{width:4px;height:4px;background:var(--muted);margin-right:16px}
+.hero-note-copy{min-width:0}
+.hero-note .eyebrow{font-size:10px;line-height:1.8}
+.hero-note h2{font-size:clamp(25px,2.8vw,38px);font-weight:450;line-height:1.35;letter-spacing:-.035em;min-height:2.7em;margin-top:17px;max-width:24ch}
+.note-rule{width:48px;border-top:1px solid var(--ink);margin:22px 0}
+.hero-note-description{max-width:48ch;font-size:15px;line-height:1.85;margin-top:8px;min-height:5.55em;color:var(--muted)}
+.hero-note-link{font-size:13px;margin-top:22px;min-height:44px}
+.hero-note:focus-within{transform:rotate(0deg)}
+.thinking-grid>canvas,.about-grid>canvas{position:absolute}
+/* Pixels sit over the illustration background; vector strokes and labels are masked. */
+.case-figure>svg,.signal-diagram svg{position:relative;z-index:-2}
+@media(hover:hover) and (pointer:fine){.hero-note:hover{--note-angle:0deg}.hero-projects button:hover>span{color:var(--ink)}.hero-projects button:hover>small{color:var(--ink)}}
+@media(max-width:900px){.notebook-opening{gap:24px 6%}.notebook-opening h1{font-size:clamp(40px,5.3vw,54px)}.notebook-introduction{font-size:16px}.hero-desk{gap:6%}.hero-note{padding:28px 24px 25px 18px;gap:20px}.hero-note-description{font-size:14px}.hero-projects button>span{font-size:18px}}
+@media(max-width:700px){
+ .hero{padding-top:calc(var(--mobile-header-height) + 32px);padding-bottom:36px}
+ .notebook-opening{grid-template-columns:1fr;gap:24px}
+ .notebook-opening .hero-intro{flex-direction:column;align-items:flex-start;gap:5px;font-size:12px;line-height:1.7}
+ .notebook-opening h1{font-size:clamp(35px,9.4vw,60px);line-height:1.12;letter-spacing:-.05em}
+ .notebook-introduction{font-size:16px;line-height:1.85;max-width:40ch;padding:0}
+ .hero-desk{grid-template-columns:1fr;gap:26px;margin-top:22px}
+ .hero-projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:0}.hero-projects button{min-height:52px;padding:12px 0}
+ .hero-projects button>span{font-size:13px;letter-spacing:-.025em}.hero-projects button>small{display:none}
+ .hero-projects button[aria-pressed="true"]{border-color:var(--ink)}
+ .hero-projects button[aria-pressed="true"]>span::before{display:none}
+ .hero-all-work{display:none}
+ .hero-note-space{padding:9px 4px}
+ .hero-note{grid-template-columns:12px 1fr;gap:18px;padding:27px 22px 25px 15px;min-height:370px;transition:none}
+ .note-binding i{margin-right:10px}
+ .hero-note h2{font-size:28px;line-height:1.4;min-height:4.2em;max-width:24ch}
+ .hero-note-description{font-size:15px;line-height:1.85;min-height:9.25em}
+ .hero-note-link{font-size:13px;margin-top:20px}
+}
+@media(max-width:450px){.hero-note-description{min-height:12.95em}}
+@media(max-width:370px){.notebook-opening h1{font-size:35px}.hero-note{gap:14px;padding-right:17px}.hero-note h2{font-size:25px;min-height:4.2em}.hero-note .eyebrow{font-size:9px}.hero-note-description{font-size:14px;min-height:12.95em}}
+@media(prefers-reduced-motion:reduce){.hero-note{transform:none!important;transition:none!important}}

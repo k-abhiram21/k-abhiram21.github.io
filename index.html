@@ -20,9 +20,9 @@
     <title>Work &amp; thinking — Abhiram</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="./styles.css?v=20261022.7">
-    <script src="./app.js?v=20261022.7" defer></script>
-    <script src="./trails.js?v=20261022.7" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261023.3">
+    <script src="./app.js?v=20261023.3" defer></script>
+    <script src="./trails.js?v=20261023.1" defer></script>
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -53,29 +53,46 @@
     <a class="fixed-top" href="#top" aria-label="Back to top" data-adaptive><span aria-hidden="true">↑</span><small aria-hidden="true">TOP</small></a>
     <main id="main">
       <section class="hero section" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="hero-intro">
-              Abhiram Kondaguduru<span>Systems · Linux · AI research</span>
-            </p>
-            <h1 id="hero-title">
-              I build.<br>I ask <em>why.</em>
-            </h1>
-            <p class="hero-description">
-              I’m a computer science student drawn to systems, Linux, and AI. I learn by tracing what’s happening, building what’s missing, and testing the idea.
-            </p>
-            <p class="hero-aside">
-              From debugging a machine to studying a model, I like finding my way through unfamiliar layers.
-            </p>
-            <div class="hero-actions">
-              <a class="button solid pixel-surface" data-invert-surface href="#work" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore my work<span aria-hidden="true">↓</span></span></a><a class="inline-link" href="./research.html">Research <span aria-hidden="true">↗</span></a>
-            </div>
+        <div class="notebook-opening">
+          <p class="hero-intro">
+            Abhiram Kondaguduru <span>Software · Linux · AI research</span>
+          </p>
+          <h1 id="hero-title">
+            Some questions<br>become <em>software.</em>
+          </h1>
+          <p class="notebook-introduction">
+            I’m a computer science student at KMIT and an AI research intern at LLMLens Paradigm. I work with Linux, software systems, and language models.
+          </p>
+        </div>
+        <div class="hero-desk">
+          <div class="hero-projects" role="group" aria-label="Choose a project note">
+            <button type="button" data-hero-project="helivision" aria-pressed="true" aria-controls="hero-project-note"><span>HeliVision</span><small>Vehicle detection and visor cues</small></button>
+            <button type="button" data-hero-project="streamwatch" aria-pressed="false" aria-controls="hero-project-note"><span>StreamWatch</span><small>Making MongoDB activity visible</small></button>
+            <button type="button" data-hero-project="research" aria-pressed="false" aria-controls="hero-project-note"><span>LLM research</span><small>My internship at LLMLens Paradigm</small></button>
+            <a class="hero-all-work text-link" href="#work">More of my work <span aria-hidden="true">↓</span></a>
           </div>
-          <a class="hero-art pixel-surface" href="#story" data-pixels="follow" data-pixel-mark="favicon" aria-label="See how I work across different systems"><canvas aria-hidden="true"></canvas>
-            <div class="art-bottom">
-              <span>One curiosity. Different layers.</span><span class="art-link-icon" aria-hidden="true">↓</span>
-            </div>
-          </a>
+          <div class="hero-note-space">
+            <article class="hero-note pixel-surface" id="hero-project-note" aria-label="Featured project note" data-pixels="follow" data-pixel-rest="0.035" data-pixel-scroll>
+              <canvas aria-hidden="true"></canvas>
+              <div class="note-binding" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="hero-note-copy" aria-live="polite" aria-atomic="true" data-shield>
+                <p class="eyebrow" id="hero-note-label">
+                  HELIVISION / PROJECT
+                </p>
+                <h2 id="hero-note-title">
+                  Traffic cues for a limited field of view.
+                </h2>
+                <div class="note-rule" aria-hidden="true">
+                </div>
+                <p class="hero-note-description" id="hero-note-description">
+                  I’d seen how partial vision loss made vehicles on one side easy to miss. HeliVision maps detected vehicles onto a visor display and adds spoken alerts.
+                </p>
+                <a class="text-link hero-note-link" id="hero-note-link" href="./helivision.html">Read the project story <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
       <section class="story section" id="story" aria-labelledby="story-title">
@@ -90,7 +107,8 @@
             The tools change. I start by understanding the system, finding a useful signal, and making the next step concrete.
           </p>
         </div>
-        <div class="thinking-grid" data-reveal>
+        <div class="thinking-grid pixel-surface" data-pixels="follow" data-pixel-strength="0.7" data-reveal>
+          <canvas aria-hidden="true"></canvas>
           <div>
             <h3>
               Get close to the problem.
@@ -133,13 +151,13 @@
                 A specialist can recognise the topic and still make an answer worse. My routing work asks when another model’s answer is worth using—and when to keep the base response.
               </p>
             </div>
-            <div class="investigation-visual" data-pixel-occluder>
+            <div class="investigation-visual" data-pixel-art>
               <div class="trace-caption">
                 <span>FOLLOW THE MECHANISM</span><span id="trace-status">01 / ROUTING</span>
               </div>
               <div class="signal-diagram" data-step="0">
                 <div class="story-scene scene-notice">
-                  <svg class="motion-diagram route-map" data-motion data-pixel-occluder viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
+                  <svg class="motion-diagram route-map" data-motion data-pixel-art viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
                     <text class="fig-label" x="310" y="65" text-anchor="middle">HOW I APPROACH THE QUESTION</text>
                     <path class="flow-line" d="M166 171h73M381 171h73"/>
                     <path class="flow-packet" d="M166 171h73M381 171h73"/>
@@ -153,7 +171,7 @@
                   </svg>
                 </div>
                 <div class="story-scene scene-prototype">
-                  <svg class="motion-diagram stream-map" data-motion data-pixel-occluder viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
+                  <svg class="motion-diagram stream-map" data-motion data-pixel-art viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
                     <path class="flow-line" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
                     <path class="flow-packet" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
                     <rect class="flow-node" x="28" y="73" width="130" height="70"/><text class="fig-name" x="93" y="105">React</text><text class="fig-small" x="93" y="126">workspace</text>
@@ -166,7 +184,7 @@
                   </svg>
                 </div>
                 <div class="story-scene scene-storage">
-                  <svg class="motion-diagram lens-art" data-motion data-pixel-occluder viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
+                  <svg class="motion-diagram lens-art" data-motion data-pixel-art viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
                     <text class="fig-label" x="39" y="40">SAMPLE THE ANSWER</text>
                     <g class="sample-answers">
                       <rect x="43" y="78" width="48" height="35"/><rect x="103" y="78" width="48" height="35"/><rect x="163" y="78" width="48" height="35"/><rect x="43" y="125" width="48" height="35"/><rect x="103" y="125" width="48" height="35"/><rect x="163" y="125" width="48" height="35"/><path d="M56 95h22m38 0h22m38 0h22M56 142h22m38 0h22m38 0h22"/>
@@ -178,7 +196,7 @@
                   </svg>
                 </div>
                 <div class="story-scene scene-test">
-                  <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+                  <svg class="motion-diagram helmet-front" data-motion data-pixel-art viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
                     <defs>
                       <clipPath id="visor-home-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
                     </defs>
@@ -229,9 +247,9 @@
           </p>
         </div>
         <div class="work-grid" data-reveal>
-          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#detection"><canvas aria-hidden="true"></canvas>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#detection" data-pixel-scroll><canvas aria-hidden="true"></canvas>
             <div class="tile-visual" aria-hidden="true">
-              <svg class="motion-diagram lens-art" data-motion data-pixel-occluder viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
+              <svg class="motion-diagram lens-art" data-motion data-pixel-art viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
                 <text class="fig-label" x="39" y="40">SAMPLE THE ANSWER</text>
                 <g class="sample-answers">
                   <rect x="43" y="78" width="48" height="35"/><rect x="103" y="78" width="48" height="35"/><rect x="163" y="78" width="48" height="35"/><rect x="43" y="125" width="48" height="35"/><rect x="103" y="125" width="48" height="35"/><rect x="163" y="125" width="48" height="35"/><path d="M56 95h22m38 0h22m38 0h22M56 142h22m38 0h22m38 0h22"/>
@@ -257,9 +275,9 @@
               </div>
             </div>
           </a>
-          <a class="work-tile pixel-surface" data-pixels="follow" href="./streamwatch.html"><canvas aria-hidden="true"></canvas>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./streamwatch.html" data-pixel-scroll><canvas aria-hidden="true"></canvas>
             <div class="tile-visual" aria-hidden="true">
-              <svg class="motion-diagram stream-map" data-motion data-pixel-occluder viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
+              <svg class="motion-diagram stream-map" data-motion data-pixel-art viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
                 <path class="flow-line" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
                 <path class="flow-packet" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
                 <rect class="flow-node" x="28" y="73" width="130" height="70"/><text class="fig-name" x="93" y="105">React</text><text class="fig-small" x="93" y="126">workspace</text>
@@ -286,9 +304,9 @@
               </div>
             </div>
           </a>
-          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#routing"><canvas aria-hidden="true"></canvas>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#routing" data-pixel-scroll><canvas aria-hidden="true"></canvas>
             <div class="tile-visual" aria-hidden="true">
-              <svg class="motion-diagram route-map" data-motion data-pixel-occluder viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
+              <svg class="motion-diagram route-map" data-motion data-pixel-art viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
                 <text class="fig-label" x="310" y="65" text-anchor="middle">HOW I APPROACH THE QUESTION</text>
                 <path class="flow-line" d="M166 171h73M381 171h73"/>
                 <path class="flow-packet" d="M166 171h73M381 171h73"/>
@@ -316,9 +334,9 @@
               </div>
             </div>
           </a>
-          <a class="work-tile pixel-surface" data-pixels="follow" href="./helivision.html"><canvas aria-hidden="true"></canvas>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./helivision.html" data-pixel-scroll><canvas aria-hidden="true"></canvas>
             <div class="tile-visual" aria-hidden="true">
-              <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+              <svg class="motion-diagram helmet-front" data-motion data-pixel-art viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
                 <defs>
                   <clipPath id="visor-tile-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
                 </defs>
@@ -395,7 +413,8 @@
         <div class="section-topline">
           <span><b>04</b> ABOUT</span>
         </div>
-        <div class="about-grid" data-reveal>
+        <div class="about-grid pixel-surface" data-pixels="follow" data-pixel-strength="0.65" data-reveal>
+          <canvas aria-hidden="true"></canvas>
           <div>
             <h2 id="about-title">
               I follow the problem<br>across the stack.

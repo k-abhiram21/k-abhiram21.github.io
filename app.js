@@ -152,7 +152,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const fields = [];
   // All surfaces share one lattice and one peak brightness.
-  const settings = { period: 4, size: 2, spacing: 8, intensity: 0.55 };
+  const settings = { period: 4, size: 2, spacing: 8, intensity: 0.62 };
   let frame = 0;
   let last = 0;
   let elapsed = 0;
@@ -188,14 +188,50 @@
       range.selectNodeContents(node);
       boxes.push(...range.getClientRects());
     }
-    field.element.querySelectorAll('[data-pixel-occluder]').forEach(el => boxes.push(el.getBoundingClientRect()));
+    field.element.querySelectorAll('svg text, [data-pixel-occluder]').forEach(el => boxes.push(el.getBoundingClientRect()));
     field.textBoxes = boxes.filter(box => box.width && box.height).map(box => ({
       left: box.left - rect.left - 5, right: box.right - rect.left + 5,
       top: box.top - rect.top - 5, bottom: box.bottom - rect.top + 5
     }));
+    buildArtShield(field, rect, ratio);
     buildCells(field);
     field.dirty = true;
     schedule();
+  }
+  // Cache a narrow shield around diagram linework. Pixels can occupy the image
+  // background without obscuring labels, outlines, or small device components.
+  function buildArtShield(field, rect, ratio) {
+    const shapes = field.element.querySelectorAll('svg[data-pixel-art] path, svg[data-pixel-art] rect, svg[data-pixel-art] circle, svg[data-pixel-art] line');
+    if (!shapes.length) { field.shield = null; return; }
+    const shield = field.shield || document.createElement('canvas');
+    shield.width = field.canvas.width;
+    shield.height = field.canvas.height;
+    const ctx = shield.getContext('2d');
+    if (!ctx) return;
+    shapes.forEach(shape => {
+      const bounds = shape.getBoundingClientRect();
+      if (shape.closest('defs, clipPath') || (!bounds.width && !bounds.height)) return;
+      const matrix = shape.getScreenCTM();
+      if (!matrix) return;
+      const style = getComputedStyle(shape);
+      if (style.visibility === 'hidden' || style.display === 'none') return;
+      const path = new Path2D();
+      const n = key => Number(shape.getAttribute(key)) || 0;
+      if (shape.tagName === 'path') path.addPath(new Path2D(shape.getAttribute('d') || ''));
+      else if (shape.tagName === 'rect') path.rect(n('x'), n('y'), n('width'), n('height'));
+      else if (shape.tagName === 'circle') path.arc(n('cx'), n('cy'), n('r'), 0, Math.PI * 2);
+      else { path.moveTo(n('x1'), n('y1')); path.lineTo(n('x2'), n('y2')); }
+      const scale = Math.hypot(matrix.a, matrix.b) || 1;
+      ctx.setTransform(ratio * matrix.a, ratio * matrix.b, ratio * matrix.c, ratio * matrix.d, ratio * (matrix.e - rect.left), ratio * (matrix.f - rect.top));
+      ctx.strokeStyle = '#000';
+      ctx.fillStyle = '#000';
+      ctx.lineWidth = 6 / scale;
+      ctx.lineJoin = 'round';
+      ctx.stroke(path);
+      // Small solid marks remain legible; larger panels still admit texture.
+      if (style.fill !== 'none' && bounds.width < 18 && bounds.height < 18) ctx.fill(path);
+    });
+    field.shield = shield;
   }
   function refreshTextMasks() { fields.forEach(measure); scheduleChrome(); }
   function protectionAt(field, x, y) {
@@ -232,7 +268,7 @@
   function draw(field) {
     const { ctx, w, h } = field;
     ctx.clearRect(0, 0, w, h);
-    if ((!field.mark && field.amount < 0.001) || !w || !h) return;
+    if ((!field.mark && !field.rest && field.amount < 0.001) || !w || !h) return;
     ctx.fillStyle = field.ink;
     const phase = reduced.matches ? Math.PI / 4 : elapsed / 1000 / settings.period * Math.PI * 2;
     for (const { x, y, mark, protection, angle } of field.cells) {
@@ -241,16 +277,21 @@
         pulse = Math.exp(3 * (Math.cos(angle - phase) - 1));
       } else {
         const distance = Math.hypot(x - field.x, y - field.y);
-        const spread = field.small ? 40 : 95;
+        const spread = field.small ? 52 : 135;
         pulse = Math.exp(-distance * distance / (2 * spread * spread));
       }
       const selectiveBoost = 1 + 0.06 * pulse * pulse * Math.max(0, (protection - 0.5) * 2);
-      const illumination = field.amount * (0.012 + settings.intensity * pulse) * selectiveBoost;
-      const resting = field.mark ? 0.018 + mark * (0.82 + 0.1 * pulse * field.amount) : 0;
+      const illumination = field.strength * field.amount * (0.012 + settings.intensity * pulse) * selectiveBoost;
+      const resting = field.mark ? 0.018 + mark * (0.82 + 0.1 * pulse * field.amount) : field.rest;
       ctx.globalAlpha = Math.max(resting, illumination) * protection;
       ctx.fillRect(Math.round(x - settings.size / 2), Math.round(y - settings.size / 2), settings.size, settings.size);
     }
     ctx.globalAlpha = 1;
+    if (field.shield) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.drawImage(field.shield, 0, 0, w, h);
+      ctx.globalCompositeOperation = 'source-over';
+    }
   }
   function tick(time) {
     frame = 0;
@@ -262,16 +303,16 @@
       if (!field.visible) continue;
       const previous = field.amount;
       const active = field.hover || field.focus || field.touch;
-      const target = active ? 1 : 0;
+      const target = active ? 1 : field.viewGlow || 0;
       field.amount = reduced.matches ? target : field.amount + (target - field.amount) * Math.min(1, dt / 140);
       if (Math.abs(field.amount - target) < 0.002) field.amount = target;
       const distance = Math.hypot(field.tx - field.x, field.ty - field.y);
       const speed = reduced.matches ? 1 : Math.min(1, dt / 65);
       field.x += (field.tx - field.x) * speed;
       field.y += (field.ty - field.y) * speed;
-      if (field.dirty || active || previous !== field.amount) draw(field);
+      if (field.dirty || active || previous !== field.amount || distance > 0.15) draw(field);
       field.dirty = false;
-      if ((!reduced.matches && active && field.mode === 'clockwise') || Math.abs(field.amount - target) > 0.001 || (active && distance > 0.15)) running = true;
+      if ((!reduced.matches && active && field.mode === 'clockwise') || Math.abs(field.amount - target) > 0.001 || (distance > 0.15)) running = true;
     }
     if (running && !document.hidden) frame = requestAnimationFrame(tick);
     else last = 0;
@@ -293,7 +334,7 @@
     const canvas = element.querySelector(':scope > canvas');
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
-    const field = { element, canvas, ctx, mode: element.dataset.pixels, mark: element.dataset.pixelMark || null, small: element.classList.contains('button'), hover: false, focus: false, touch: false, amount: 0, x: 0, y: 0, tx: 0, ty: 0, w: 0, h: 0, textBoxes: [], cells: [], dirty: true, visible: true, ink: '#111' };
+    const field = { element, canvas, ctx, mode: element.dataset.pixels, mark: element.dataset.pixelMark || null, small: element.classList.contains('button'), strength: Number(element.dataset.pixelStrength) || 1, rest: Number(element.dataset.pixelRest) || 0, viewGlow: 0, hover: false, focus: false, touch: false, amount: 0, x: 0, y: 0, tx: 0, ty: 0, w: 0, h: 0, textBoxes: [], cells: [], dirty: true, visible: true, ink: '#111' };
     const interactionTarget = element.closest('summary') || element;
     fields.push(field);
     fieldByElement.set(element, field);
@@ -363,6 +404,73 @@
     if (document.hidden) { cancelAnimationFrame(frame); frame = 0; last = 0; }
     else schedule();
   });
+
+  const projectNotes = {
+    helivision: {"label": "HELIVISION / PROJECT", "title": "Traffic cues for a limited field of view.", "description": "I’d seen how partial vision loss made vehicles on one side easy to miss. HeliVision maps detected vehicles onto a visor display and adds spoken alerts.", "href": "./helivision.html", "link": "Read the project story"},
+    streamwatch: {"label": "STREAMWATCH / PROJECT", "title": "MongoDB data and activity in one workspace.", "description": "Monitoring an unstructured database meant looking beyond its contents. StreamWatch connects data exploration with application metrics and Grafana dashboards to make the system easier to inspect.", "href": "./streamwatch.html", "link": "Read the project story"},
+    research: {"label": "LLMLENS PARADIGM / INTERNSHIP", "title": "Agreement doesn’t guarantee a correct answer.", "description": "I study the limits of uncertainty-based hallucination detection, alongside routing work that asks when another model’s response is worth using.", "href": "./research.html", "link": "Read the research notes"}
+  };
+  const projectButtons = [...document.querySelectorAll('[data-hero-project]')];
+  projectButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const note = projectNotes[button.dataset.heroProject];
+      document.getElementById('hero-note-label').textContent = note.label;
+      document.getElementById('hero-note-title').textContent = note.title;
+      document.getElementById('hero-note-description').textContent = note.description;
+      const link = document.getElementById('hero-note-link');
+      link.href = note.href;
+      const arrow = document.createElement('span');
+      arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '↗';
+      link.replaceChildren(document.createTextNode(note.link + ' '), arrow);
+      projectButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      refreshTextMasks();
+    });
+    button.addEventListener('keydown', event => {
+      if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      const direction = ['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1;
+      const next = projectButtons[(index + direction + projectButtons.length) % projectButtons.length];
+      next.focus(); next.click();
+    });
+  });
+
+  // Phones get a small, scroll-driven response on chosen artwork, with no
+  // permanent animation loop. The note settles level as it enters the viewport.
+  const scrollResponse = matchMedia('(hover: none), (pointer: coarse), (max-width: 700px)');
+  const heroNote = document.querySelector('.hero-note');
+  let responseFrame = 0;
+  function updateScrollResponse() {
+    responseFrame = 0;
+    const enabled = scrollResponse.matches && !reduced.matches;
+    if (heroNote) {
+      if (enabled) {
+        const progress = Math.max(0, Math.min(1, (innerHeight * 0.9 - heroNote.getBoundingClientRect().top) / (innerHeight * 0.42)));
+        heroNote.style.setProperty('--note-angle', `${-1.25 * (1 - progress)}deg`);
+      } else heroNote.style.removeProperty('--note-angle');
+    }
+    fields.forEach(field => {
+      if (!field.element.hasAttribute('data-pixel-scroll')) return;
+      const rect = field.element.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (innerHeight - rect.top) / (innerHeight + rect.height)));
+      field.viewGlow = enabled && rect.bottom > 0 && rect.top < innerHeight ? Math.sin(progress * Math.PI) * 0.38 : 0;
+      if (field.viewGlow && !field.hover && !field.touch && !field.focus) {
+        field.tx = field.w * (0.25 + progress * 0.5);
+        field.ty = field.h * progress;
+      }
+      field.dirty = true;
+    });
+    schedule();
+  }
+  function scheduleScrollResponse() {
+    if (!responseFrame) responseFrame = requestAnimationFrame(updateScrollResponse);
+  }
+  window.addEventListener('scroll', scheduleScrollResponse, { passive: true });
+  window.addEventListener('resize', scheduleScrollResponse);
+  scrollResponse.addEventListener('change', scheduleScrollResponse);
+  reduced.addEventListener('change', scheduleScrollResponse);
+  heroNote?.addEventListener('transitionend', refreshTextMasks);
+  document.fonts?.ready.then(scheduleScrollResponse);
+  scheduleScrollResponse();
 
   const themeToggle = document.querySelector('.theme-toggle');
   const systemTheme = matchMedia('(prefers-color-scheme: dark)');
