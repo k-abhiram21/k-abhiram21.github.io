@@ -1,161 +1,463 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Abhiram’s developer portfolio. Projects, experiments, and the thinking behind them. Content preview.">
-  <meta name="theme-color" content="#f1f1f1">
-  <script>
-    (() => {
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Abhiram Kondaguduru — systems, Linux, AI engineering and research. Projects, research questions, and the thinking behind them.">
+    <meta property="og:title" content="Work &amp; thinking — Abhiram">
+    <meta property="og:description" content="Abhiram Kondaguduru — systems, Linux, AI engineering and research. Projects, research questions, and the thinking behind them.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://k-abhiram21.github.io/">
+    <meta name="theme-color" content="#f1f1f1">
+    <script>
+      (() => {
       let theme;
       try { theme = localStorage.getItem('portfolio-theme'); } catch {}
       document.documentElement.dataset.theme = theme === 'dark' || theme === 'light'
-        ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    })();
-  </script>
-  <title>Abhiram — Work &amp; thinking</title>
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="./styles.css?v=20261021.15">
-  <script src="./app.js?v=20261021.15" defer></script>
-  <script src="./trails.js?v=20261021.15" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" data-adaptive>
-    <a class="wordmark" href="#top" aria-label="Abhiram, back to top">ABHIRAM<span class="brand-pixel" aria-hidden="true"></span></a>
-    <nav aria-label="Main navigation">
-      <a class="mobile-home" href="#top">Top</a>
-      <a href="#story">Process</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="header-tools">
-      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
-        <span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span>
-      </button>
-    </div>
-  </header>
-
-  <a class="identity-rail" href="#top" aria-label="Abhiram, return to top">
-    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 9h10v3H7v24h7v3H4zm30 0h10v30H34v-3h7V12h-7z" fill="currentColor"/><path d="M21 21h6v6h-6z" fill="currentColor"/></svg>
-    <span aria-hidden="true">ABHIRAM / WORK &amp; THINKING</span>
-  </a>
-
-  <aside class="page-index" aria-label="Page sections">
-    <a href="#top" aria-label="Introduction" data-label="Intro" aria-current="location"><span>01</span></a>
-    <a href="#story" aria-label="Interactive story" data-label="Process"><span>02</span></a>
-    <a href="#work" aria-label="Selected work" data-label="Work"><span>03</span></a>
-    <a href="#about" aria-label="About" data-label="About"><span>04</span></a>
-    <a href="#contact" aria-label="Contact" data-label="Contact"><span>05</span></a>
-    <svg class="index-trail" aria-hidden="true" focusable="false"><defs><linearGradient id="index-tail" gradientUnits="userSpaceOnUse" x1="0" x2="0"><stop offset="0" stop-color="white" stop-opacity=".8"/><stop offset="1" stop-color="white" stop-opacity=".08"/></linearGradient></defs><path fill="url(#index-tail)"/></svg>
-    <i class="index-runner" aria-hidden="true"></i>
-  </aside>
-
-  <a class="fixed-top" href="#top" aria-label="Back to top" data-adaptive><span aria-hidden="true">↑</span><small aria-hidden="true">TOP</small></a>
-
-  <main id="main">
-    <section class="hero section" id="top" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="hero-intro">Abhiram — developer</p>
-          <h1 id="hero-title">I build.<br>I ask <em>why.</em></h1>
-          <p class="hero-description">Projects are one part of the story.<br> The thinking behind them is the other.</p>
-          <div class="hero-actions"><a class="button solid pixel-surface" data-invert-surface href="#work" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore the work <span aria-hidden="true">↓</span></span></a><a class="inline-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
-        </div>
-        <a class="hero-art pixel-surface" href="#story" data-pixels="follow" data-pixel-mark="favicon" aria-label="Explore the interactive story">
-          <canvas aria-hidden="true"></canvas>
-          <div class="art-bottom"><span>Follow the signal</span><span class="art-link-icon" aria-hidden="true">↓</span></div>
-        </a>
+      ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+    </script>
+    <title>Work &amp; thinking — Abhiram</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="./styles.css?v=20261022.7">
+    <script src="./app.js?v=20261022.7" defer></script>
+    <script src="./trails.js?v=20261022.7" defer></script>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-adaptive>
+      <a class="wordmark" href="./index.html#top" aria-label="Abhiram, home">ABHIRAM<span class="brand-pixel" aria-hidden="true"></span></a>
+      <nav aria-label="Main navigation">
+        <a class="home-link" data-page-link="home" href="./index.html#top">Home</a><a data-page-link="projects" href="./projects.html">Projects</a><a data-page-link="research" href="./research.html">Research</a><a data-scroll-link href="#about">About</a><a data-scroll-link href="#contact">Contact</a>
+      </nav>
+      <div class="header-tools">
+        <a class="profile-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" aria-label="Abhiram on GitHub">GitHub <span aria-hidden="true">↗</span></a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span></button>
       </div>
-    </section>
-
-    <section class="story section" id="story" aria-labelledby="story-title">
-      <div class="section-topline"><span><b>02</b> PROCESS</span></div>
-      <div class="story-heading-row" data-reveal><h2 id="story-title">Follow the signal.</h2><p>How a small observation changes the search.<br>Four moments, one investigation.</p></div>
-      <div class="story-machine pixel-surface" data-reveal data-pixels="follow">
-        <canvas aria-hidden="true"></canvas>
-
-        <div class="story-top" data-shield><span id="story-counter">01 / 04</span><span class="story-instruction"><span class="hover-instruction">Hover or focus a step</span><span class="touch-instruction">Tap a step to explore</span></span></div>
-        <div class="story-content">
-          <div class="story-copy" aria-live="polite" aria-atomic="true" data-shield>
-            <p class="eyebrow" id="story-eyebrow">THE QUESTION</p>
-            <h3 id="story-heading">Connected.<br>Still offline.</h3>
-            <p id="story-description">The connection looks healthy, but pages won’t load. Start by finding which part of the path is failing.</p>
+    </header>
+    <a class="identity-rail" href="./index.html#top" aria-label="Abhiram, home">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M4 9h10v3H7v24h7v3H4zm30 0h10v30H34v-3h7V12h-7zM21 21h6v6h-6z" fill="currentColor"/>
+      </svg>
+      <span aria-hidden="true">ABHIRAM / WORK &amp; THINKING</span></a>
+    <aside class="page-index" aria-label="Page sections">
+      <a href="#top" aria-label="Intro" data-label="Intro" aria-current="location"><span>01</span></a><a href="#story" aria-label="Approach" data-label="Approach"><span>02</span></a><a href="#work" aria-label="Work" data-label="Work"><span>03</span></a><a href="#about" aria-label="About" data-label="About"><span>04</span></a><a href="#contact" aria-label="Contact" data-label="Contact"><span>05</span></a>
+      <svg class="index-trail" aria-hidden="true">
+        <defs>
+          <linearGradient id="index-tail" gradientUnits="userSpaceOnUse" x1="0" x2="0"><stop offset="0" stop-color="white" stop-opacity=".8"/><stop offset="1" stop-color="white" stop-opacity=".08"/></linearGradient>
+        </defs>
+        <path fill="url(#index-tail)"/>
+      </svg>
+      <i class="index-runner" aria-hidden="true"></i>
+    </aside>
+    <a class="fixed-top" href="#top" aria-label="Back to top" data-adaptive><span aria-hidden="true">↑</span><small aria-hidden="true">TOP</small></a>
+    <main id="main">
+      <section class="hero section" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-intro">
+              Abhiram Kondaguduru<span>Systems · Linux · AI research</span>
+            </p>
+            <h1 id="hero-title">
+              I build.<br>I ask <em>why.</em>
+            </h1>
+            <p class="hero-description">
+              I’m a computer science student drawn to systems, Linux, and AI. I learn by tracing what’s happening, building what’s missing, and testing the idea.
+            </p>
+            <p class="hero-aside">
+              From debugging a machine to studying a model, I like finding my way through unfamiliar layers.
+            </p>
+            <div class="hero-actions">
+              <a class="button solid pixel-surface" data-invert-surface href="#work" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore my work<span aria-hidden="true">↓</span></span></a><a class="inline-link" href="./research.html">Research <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
-          <div class="investigation-visual" data-pixel-occluder>
-            <div class="trace-caption"><span>REQUEST PATH</span><span id="trace-status">01 / OBSERVE</span></div>
-            <div class="signal-diagram" data-step="0" aria-hidden="true">
-              <svg class="network-map" viewBox="0 0 540 270">
-                <path class="route route-link" d="M95 132H209"/>
-                <path class="route route-original" d="M275 132H326V62H411"/>
-                <path class="route route-alternate" d="M275 132H326V208H411"/>
-                <path class="packet packet-link" pathLength="100" d="M95 132H209"/>
-                <path class="packet packet-original" pathLength="100" d="M275 132H326V62H411"/>
-                <path class="packet packet-alternate" pathLength="100" d="M275 132H326V208H411"/>
-                <g class="network-node device-node" transform="translate(62 132)"><rect class="node-frame" x="-33" y="-33" width="66" height="66"/><g class="map-icon"><rect x="-12" y="-12" width="24" height="17"/><path d="M-16 12h32M-6 6v6m12-6v6"/></g><text y="57">DEVICE</text></g>
-                <g class="network-node gateway-node" transform="translate(242 132)"><rect class="node-frame" x="-33" y="-33" width="66" height="66"/><g class="map-icon"><rect x="-13" y="-2" width="26" height="15"/><path d="M-8-2v-15m16 13v-15M-8 6h3m5 0h3"/></g><text y="57">GATEWAY</text></g>
-                <g class="network-node original-node" transform="translate(444 62)"><rect class="node-frame" x="-33" y="-33" width="66" height="66"/><g class="map-icon"><path d="M-11-15h22v30h-22zM-6-8H6M-6-1H6M-6 6h7"/></g><text y="57">ORIGINAL DNS</text><text class="failure-note" y="-48">TIMEOUT</text></g>
-                <g class="network-node alternate-node" transform="translate(444 208)"><rect class="node-frame" x="-33" y="-33" width="66" height="66"/><g class="map-icon alternate-server"><path d="M-11-15h22v30h-22zM-6-8H6M-6-1H6M-6 6h7"/></g><path class="resolved-check" d="M-12 0l8 8L13-9"/><text y="57">ALTERNATE DNS</text></g>
-                <g class="fault-marker" transform="translate(351 62)"><rect x="-8" y="-8" width="16" height="16"/><path d="M-3-3l6 6m0-6l-6 6"/></g>
+          <a class="hero-art pixel-surface" href="#story" data-pixels="follow" data-pixel-mark="favicon" aria-label="See how I work across different systems"><canvas aria-hidden="true"></canvas>
+            <div class="art-bottom">
+              <span>One curiosity. Different layers.</span><span class="art-link-icon" aria-hidden="true">↓</span>
+            </div>
+          </a>
+        </div>
+      </section>
+      <section class="story section" id="story" aria-labelledby="story-title">
+        <div class="section-topline">
+          <span><b>02</b> HOW I FIND MY WAY</span>
+        </div>
+        <div class="story-heading-row" data-reveal>
+          <h2 id="story-title">
+            New territory.<br>A way to get started.
+          </h2>
+          <p>
+            The tools change. I start by understanding the system, finding a useful signal, and making the next step concrete.
+          </p>
+        </div>
+        <div class="thinking-grid" data-reveal>
+          <div>
+            <h3>
+              Get close to the problem.
+            </h3>
+            <p>
+              Read the code, follow the data, reproduce the behaviour. Learn the parts that matter.
+            </p>
+          </div>
+          <div>
+            <h3>
+              Build a way to see it.
+            </h3>
+            <p>
+              A trace, a dashboard, an experiment, a prototype. Make the question easier to work with.
+            </p>
+          </div>
+          <div>
+            <h3>
+              Carry the learning across.
+            </h3>
+            <p>
+              Use what I’ve learned in one layer to ask better questions in the next.
+            </p>
+          </div>
+        </div>
+        <div class="story-machine pixel-surface" data-reveal data-pixels="follow">
+          <canvas aria-hidden="true"></canvas>
+          <div class="story-top" data-shield>
+            <span>ACROSS THE STACK <span class="story-divider">/</span> <span id="story-counter">01 / 04</span></span><span class="story-instruction"><span class="hover-instruction">Hover or focus a field</span><span class="touch-instruction">Tap a field to explore</span></span>
+          </div>
+          <div class="story-content">
+            <div class="story-copy" aria-live="polite" aria-atomic="true" data-shield>
+              <p class="eyebrow" id="story-eyebrow">
+                ROUTING &amp; DECISIONS
+              </p>
+              <h3 id="story-heading">
+                The right topic.<br>The wrong answer?
+              </h3>
+              <p id="story-description">
+                A specialist can recognise the topic and still make an answer worse. My routing work asks when another model’s answer is worth using—and when to keep the base response.
+              </p>
+            </div>
+            <div class="investigation-visual" data-pixel-occluder>
+              <div class="trace-caption">
+                <span>FOLLOW THE MECHANISM</span><span id="trace-status">01 / ROUTING</span>
+              </div>
+              <div class="signal-diagram" data-step="0">
+                <div class="story-scene scene-notice">
+                  <svg class="motion-diagram route-map" data-motion data-pixel-occluder viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
+                    <text class="fig-label" x="310" y="65" text-anchor="middle">HOW I APPROACH THE QUESTION</text>
+                    <path class="flow-line" d="M166 171h73M381 171h73"/>
+                    <path class="flow-packet" d="M166 171h73M381 171h73"/>
+                    <rect class="flow-node" x="24" y="130" width="142" height="82"/>
+                    <text class="fig-name" x="95" y="166">Question</text><text class="fig-small" x="95" y="194">Frame it.</text>
+                    <rect class="flow-node" x="239" y="130" width="142" height="82"/>
+                    <text class="fig-name" x="310" y="166">Evidence</text><text class="fig-small" x="310" y="194">Examine it.</text>
+                    <rect class="flow-node" x="454" y="130" width="142" height="82"/>
+                    <text class="fig-name" x="525" y="166">Decision</text><text class="fig-small" x="525" y="194">Weigh it.</text>
+                    <text class="fig-label" x="310" y="290" text-anchor="middle">RELEVANCE ≠ USEFULNESS</text>
+                  </svg>
+                </div>
+                <div class="story-scene scene-prototype">
+                  <svg class="motion-diagram stream-map" data-motion data-pixel-occluder viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
+                    <path class="flow-line" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+                    <path class="flow-packet" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+                    <rect class="flow-node" x="28" y="73" width="130" height="70"/><text class="fig-name" x="93" y="105">React</text><text class="fig-small" x="93" y="126">workspace</text>
+                    <rect class="flow-node" x="222" y="73" width="140" height="70"/><text class="fig-name" x="292" y="105">FastAPI</text><text class="fig-small" x="292" y="126">application</text>
+                    <rect class="flow-node" x="430" y="73" width="145" height="70"/><text class="fig-name" x="502" y="105">MongoDB</text><text class="fig-small" x="502" y="126">document data</text>
+                    <rect class="flow-node" x="222" y="213" width="140" height="70"/><text class="fig-name" x="292" y="247">Prometheus</text><text class="fig-small" x="292" y="267">metrics</text>
+                    <rect class="flow-node" x="430" y="213" width="145" height="70"/><text class="fig-name" x="502" y="247">Grafana</text><text class="fig-small" x="502" y="267">dashboards</text>
+                    <path class="return-path" d="M502 284v41H93V144"/><path class="flow-packet return-packet" d="M502 284v41H93V144"/>
+                    <text class="fig-label" x="310" y="31" text-anchor="middle">DATA + OBSERVABILITY</text><text class="fig-small" x="306" y="348">Panels return to the workspace</text>
+                  </svg>
+                </div>
+                <div class="story-scene scene-storage">
+                  <svg class="motion-diagram lens-art" data-motion data-pixel-occluder viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
+                    <text class="fig-label" x="39" y="40">SAMPLE THE ANSWER</text>
+                    <g class="sample-answers">
+                      <rect x="43" y="78" width="48" height="35"/><rect x="103" y="78" width="48" height="35"/><rect x="163" y="78" width="48" height="35"/><rect x="43" y="125" width="48" height="35"/><rect x="103" y="125" width="48" height="35"/><rect x="163" y="125" width="48" height="35"/><path d="M56 95h22m38 0h22m38 0h22M56 142h22m38 0h22m38 0h22"/>
+                    </g>
+                    <path class="comparison-axis" d="M274 62v137"/><text class="inequality" x="274" y="153">≠</text>
+                    <rect class="truth-box" x="337" y="86" width="131" height="70"/><path class="truth-cross" d="M387 108l27 27m0-27-27 27"/>
+                    <text class="fig-concept" x="126" y="217">Agreement</text><text class="fig-concept" x="402" y="217">Correctness</text>
+                    <path class="signal-sweep" d="M43 252h425"/><text class="fig-label" x="270" y="287" text-anchor="middle">CONSISTENCY IS ONE SIGNAL</text>
+                  </svg>
+                </div>
+                <div class="story-scene scene-test">
+                  <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+                    <defs>
+                      <clipPath id="visor-home-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
+                    </defs>
+                    <path class="device-shell" d="M151 153C151 74 219 51 300 51S449 74 449 153L462 238Q446 324 300 344Q154 324 138 238Z"/>
+                    <path class="visor-glass" d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/>
+                    <g clip-path="url(#visor-home-helmet)">
+                      <path class="visor-scan" d="M164 195H435"/><path class="visor-guide" d="M232 143v122M368 143v122"/>
+                    </g>
+                    <rect class="pi-board" x="259" y="35" width="82" height="29" rx="2"/><path class="board-detail" d="M269 42h17v14h-17m25-12h36m-36 8h36"/>
+                    <rect class="camera-module" x="282" y="153" width="36" height="26"/><circle class="camera-lens" cx="300" cy="166" r="8"/>
+                    <g class="oled-module">
+                      <rect x="271" y="252" width="58" height="34" rx="1"/><path d="M300 258v22M277 269h46"/><rect class="oled-cue cue-one" x="283" y="260" width="5" height="5"/><rect class="oled-cue cue-two" x="310" y="274" width="5" height="5"/>
+                    </g>
+                    <path class="diagram-leader" d="M281 166H87v-28M329 272h145v81h-99M341 49h126v-18"/>
+                    <text class="fig-label" x="49" y="124">CAMERA</text><text class="fig-label" x="300" y="376" text-anchor="middle">OLED / LOWER VISOR</text><text class="fig-label" x="405" y="21">RASPBERRY PI</text>
+                    <path class="helmet-chin" d="M219 309h162M243 319h114"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="trace-readout">
+                <div>
+                  <span class="readout-key" id="trace-command">working layer</span><span id="trace-result">Adapter routing</span>
+                </div>
+                <div class="trace-detail" id="trace-detail">
+                  A relevant response still needs to be useful.
+                </div>
+                <a class="text-link" id="story-link" href="./research.html#routing">Explore routing work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="story-controls" data-shield style="--step:0">
+            <div class="story-steps" role="group" aria-label="Explore how I adapt across fields">
+              <button type="button" data-step="0" aria-pressed="true"><span>01</span> Routing</button><button type="button" data-step="1" aria-pressed="false"><span>02</span> Data</button><button type="button" data-step="2" aria-pressed="false"><span>03</span> Research</button><button type="button" data-step="3" aria-pressed="false"><span>04</span> Hardware</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="work section" id="work" aria-labelledby="work-title">
+        <div class="section-topline">
+          <span><b>03</b> PROJECTS & RESEARCH</span>
+        </div>
+        <div class="work-heading-row" data-reveal>
+          <h2 id="work-title">
+            Different projects.<br>A shared curiosity.
+          </h2>
+          <p>
+            Systems that make activity visible.<br>Research that asks what a signal means.
+          </p>
+        </div>
+        <div class="work-grid" data-reveal>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#detection"><canvas aria-hidden="true"></canvas>
+            <div class="tile-visual" aria-hidden="true">
+              <svg class="motion-diagram lens-art" data-motion data-pixel-occluder viewBox="0 0 540 320" role="img" aria-label="Repeated model answers may agree while the answer is incorrect">
+                <text class="fig-label" x="39" y="40">SAMPLE THE ANSWER</text>
+                <g class="sample-answers">
+                  <rect x="43" y="78" width="48" height="35"/><rect x="103" y="78" width="48" height="35"/><rect x="163" y="78" width="48" height="35"/><rect x="43" y="125" width="48" height="35"/><rect x="103" y="125" width="48" height="35"/><rect x="163" y="125" width="48" height="35"/><path d="M56 95h22m38 0h22m38 0h22M56 142h22m38 0h22m38 0h22"/>
+                </g>
+                <path class="comparison-axis" d="M274 62v137"/><text class="inequality" x="274" y="153">≠</text>
+                <rect class="truth-box" x="337" y="86" width="131" height="70"/><path class="truth-cross" d="M387 108l27 27m0-27-27 27"/>
+                <text class="fig-concept" x="126" y="217">Agreement</text><text class="fig-concept" x="402" y="217">Correctness</text>
+                <path class="signal-sweep" d="M43 252h425"/><text class="fig-label" x="270" y="287" text-anchor="middle">CONSISTENCY IS ONE SIGNAL</text>
               </svg>
             </div>
-            <div class="trace-readout"><div><span class="readout-key" id="trace-command">connection</span><span id="trace-result">established</span></div><div class="trace-detail" id="trace-detail">Page request → no response</div></div>
+            <div class="tile-copy" data-shield>
+              <p class="eyebrow">
+                LLMLENS / RESEARCH
+              </p>
+              <h3>
+                How far can uncertainty take us?
+              </h3>
+              <p>
+                Studying the limits of uncertainty-based hallucination detection across model families and tasks.
+              </p>
+              <div class="tile-meta">
+                <span>LLM EVALUATION</span><span class="tile-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./streamwatch.html"><canvas aria-hidden="true"></canvas>
+            <div class="tile-visual" aria-hidden="true">
+              <svg class="motion-diagram stream-map" data-motion data-pixel-occluder viewBox="0 0 620 360" role="img" aria-label="StreamWatch connects the React workspace to FastAPI and MongoDB, with a separate monitoring path through Prometheus and Grafana">
+                <path class="flow-line" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+                <path class="flow-packet" d="M158 108h64M362 108h68M292 144v69M361 249h69"/>
+                <rect class="flow-node" x="28" y="73" width="130" height="70"/><text class="fig-name" x="93" y="105">React</text><text class="fig-small" x="93" y="126">workspace</text>
+                <rect class="flow-node" x="222" y="73" width="140" height="70"/><text class="fig-name" x="292" y="105">FastAPI</text><text class="fig-small" x="292" y="126">application</text>
+                <rect class="flow-node" x="430" y="73" width="145" height="70"/><text class="fig-name" x="502" y="105">MongoDB</text><text class="fig-small" x="502" y="126">document data</text>
+                <rect class="flow-node" x="222" y="213" width="140" height="70"/><text class="fig-name" x="292" y="247">Prometheus</text><text class="fig-small" x="292" y="267">metrics</text>
+                <rect class="flow-node" x="430" y="213" width="145" height="70"/><text class="fig-name" x="502" y="247">Grafana</text><text class="fig-small" x="502" y="267">dashboards</text>
+                <path class="return-path" d="M502 284v41H93V144"/><path class="flow-packet return-packet" d="M502 284v41H93V144"/>
+                <text class="fig-label" x="310" y="31" text-anchor="middle">DATA + OBSERVABILITY</text><text class="fig-small" x="306" y="348">Panels return to the workspace</text>
+              </svg>
+            </div>
+            <div class="tile-copy" data-shield>
+              <p class="eyebrow">
+                OBSERVABILITY / PROJECT
+              </p>
+              <h3>
+                StreamWatch
+              </h3>
+              <p>
+                A monitoring workspace for MongoDB: application health, live dashboards, and AI-assisted data exploration.
+              </p>
+              <div class="tile-meta">
+                <span>REACT · FASTAPI · MONGODB</span><span class="tile-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./research.html#routing"><canvas aria-hidden="true"></canvas>
+            <div class="tile-visual" aria-hidden="true">
+              <svg class="motion-diagram route-map" data-motion data-pixel-occluder viewBox="0 0 620 350" role="img" aria-label="A conceptual view of my approach: frame a question, examine the evidence, and make a reasoned decision.">
+                <text class="fig-label" x="310" y="65" text-anchor="middle">HOW I APPROACH THE QUESTION</text>
+                <path class="flow-line" d="M166 171h73M381 171h73"/>
+                <path class="flow-packet" d="M166 171h73M381 171h73"/>
+                <rect class="flow-node" x="24" y="130" width="142" height="82"/>
+                <text class="fig-name" x="95" y="166">Question</text><text class="fig-small" x="95" y="194">Frame it.</text>
+                <rect class="flow-node" x="239" y="130" width="142" height="82"/>
+                <text class="fig-name" x="310" y="166">Evidence</text><text class="fig-small" x="310" y="194">Examine it.</text>
+                <rect class="flow-node" x="454" y="130" width="142" height="82"/>
+                <text class="fig-name" x="525" y="166">Decision</text><text class="fig-small" x="525" y="194">Weigh it.</text>
+                <text class="fig-label" x="310" y="290" text-anchor="middle">RELEVANCE ≠ USEFULNESS</text>
+              </svg>
+            </div>
+            <div class="tile-copy" data-shield>
+              <p class="eyebrow">
+                MY ROUTING WORK / RESEARCH
+              </p>
+              <h3>
+                Deciding when to change the answer
+              </h3>
+              <p>
+                My contribution to a team research effort: routing, verification, debugging, and evaluation.
+              </p>
+              <div class="tile-meta">
+                <span>ROUTING · VERIFICATION</span><span class="tile-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+          <a class="work-tile pixel-surface" data-pixels="follow" href="./helivision.html"><canvas aria-hidden="true"></canvas>
+            <div class="tile-visual" aria-hidden="true">
+              <svg class="motion-diagram helmet-front" data-motion data-pixel-occluder viewBox="0 0 600 390" role="img" aria-label="Front helmet view, with the OLED at the lower centre of the visor, a camera above it, and the Raspberry Pi on top">
+                <defs>
+                  <clipPath id="visor-tile-helmet"><path d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/></clipPath>
+                </defs>
+                <path class="device-shell" d="M151 153C151 74 219 51 300 51S449 74 449 153L462 238Q446 324 300 344Q154 324 138 238Z"/>
+                <path class="visor-glass" d="M171 160Q300 120 429 160L414 253Q300 292 186 253Z"/>
+                <g clip-path="url(#visor-tile-helmet)">
+                  <path class="visor-scan" d="M164 195H435"/><path class="visor-guide" d="M232 143v122M368 143v122"/>
+                </g>
+                <rect class="pi-board" x="259" y="35" width="82" height="29" rx="2"/><path class="board-detail" d="M269 42h17v14h-17m25-12h36m-36 8h36"/>
+                <rect class="camera-module" x="282" y="153" width="36" height="26"/><circle class="camera-lens" cx="300" cy="166" r="8"/>
+                <g class="oled-module">
+                  <rect x="271" y="252" width="58" height="34" rx="1"/><path d="M300 258v22M277 269h46"/><rect class="oled-cue cue-one" x="283" y="260" width="5" height="5"/><rect class="oled-cue cue-two" x="310" y="274" width="5" height="5"/>
+                </g>
+                <path class="diagram-leader" d="M281 166H87v-28M329 272h145v81h-99M341 49h126v-18"/>
+                <text class="fig-label" x="49" y="124">CAMERA</text><text class="fig-label" x="300" y="376" text-anchor="middle">OLED / LOWER VISOR</text><text class="fig-label" x="405" y="21">RASPBERRY PI</text>
+                <path class="helmet-chin" d="M219 309h162M243 319h114"/>
+              </svg>
+            </div>
+            <div class="tile-copy" data-shield>
+              <p class="eyebrow">
+                EMBEDDED VISION / PROJECT
+              </p>
+              <h3>
+                HeliVision
+              </h3>
+              <p>
+                A real problem in noticing nearby vehicles became a camera-to-cue helmet prototype—and a new area to learn.
+              </p>
+              <div class="tile-meta">
+                <span>RASPBERRY PI · COMPUTER VISION</span><span class="tile-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="collection-links">
+          <a class="text-link" href="./projects.html">Explore projects <span aria-hidden="true">↗</span></a><a class="text-link" href="./research.html">Explore the research <span aria-hidden="true">↗</span></a>
+        </div>
+        <details class="notebook" id="notebook" data-reveal>
+          <summary>
+            <span class="notebook-label">Behind the work<small>The questions and engineering habits that shape my research.</small></span><span class="notebook-action pixel-surface" data-pixels="clockwise"><canvas aria-hidden="true"></canvas><span data-shield><span class="when-closed">Open notes</span><span class="when-open">Close notes</span><i aria-hidden="true">↓</i></span></span>
+          </summary>
+          <div class="notebook-body">
+            <div>
+              <h3>
+                Relevance is a starting point.
+              </h3>
+              <p>
+                A specialist understanding the topic is only part of the question. My routing work asks whether its contribution is useful for the task. That distinction changes where I put my attention: I look at behaviour, investigate the gap between intention and outcome, and work on ways to make the decision easier to understand.
+              </p>
+              <a class="text-link" href="./research.html#routing-policy">How I frame the question <span aria-hidden="true">↗</span></a>
+            </div>
+            <div>
+              <h3>
+                Complexity needs to earn its place.
+              </h3>
+              <p>
+                Adding another component creates work as well as possibilities. I think about what it contributes, what it takes to use, and how it fits into the system around it. That keeps the engineering connected to the original problem, and gives debugging a purpose beyond simply making a larger pipeline run.
+              </p>
+              <a class="text-link" href="./research.html#routing-verifier">Lessons from debugging <span aria-hidden="true">↗</span></a>
+            </div>
+            <div>
+              <h3>
+                An experiment should answer the question.
+              </h3>
+              <p>
+                I work on the code that evaluates an idea, as well as the idea’s implementation. Clear comparisons and inspectable behaviour help me understand what a result means. Tightening that engineering is part of the research: it makes the next question more precise and the next iteration easier to reason about.
+              </p>
+              <a class="text-link" href="./research.html#routing-benchmark">My evaluation work <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </details>
+      </section>
+      <section class="about section" id="about" aria-labelledby="about-title">
+        <div class="section-topline">
+          <span><b>04</b> ABOUT</span>
+        </div>
+        <div class="about-grid" data-reveal>
+          <div>
+            <h2 id="about-title">
+              I follow the problem<br>across the stack.
+            </h2>
+            <p class="about-signature">
+              Abhiram Kondaguduru<br><span>B.Tech CSE · KMIT · Expected 2028</span>
+            </p>
+          </div>
+          <div class="about-copy">
+            <p class="about-lead">
+              I’m at home in software and systems, and willing to learn the layer a problem takes me to.
+            </p>
+            <p>
+              Most of my work sits around Linux, AI engineering, and research. HeliVision took that curiosity into hardware; StreamWatch into observability; my current research into the reliability of language-model decisions.
+            </p>
+            <div class="context-row">
+              <h3>
+                How I work
+              </h3>
+              <p>
+                I read, experiment, use LLM tools, debug, and iterate. Moving between those modes helps me get up to speed in unfamiliar codebases and technical areas.
+              </p>
+            </div>
+            <div class="context-row">
+              <h3>
+                Where I’m going deeper
+              </h3>
+              <p>
+                Model evaluation, adapter routing, and the systems that make AI behaviour easier to inspect.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="story-controls" data-shield style="--step:0">
-          <div class="story-steps" role="group" aria-label="Choose a story step">
-            <button type="button" data-step="0" aria-pressed="true"><span>01</span> Question</button>
-            <button type="button" data-step="1" aria-pressed="false"><span>02</span> Clue</button>
-            <button type="button" data-step="2" aria-pressed="false"><span>03</span> Decision</button>
-            <button type="button" data-step="3" aria-pressed="false"><span>04</span> Outcome</button>
+      </section>
+      <section class="contact section" id="contact" aria-labelledby="contact-title">
+        <div class="section-topline">
+          <span><b>05</b> CONTACT</span>
+        </div>
+        <div class="contact-grid" data-reveal>
+          <div>
+            <h2 id="contact-title">
+              Let’s talk.
+            </h2>
+            <p class="contact-kicker">
+              A project, a research question,<br>or a system worth figuring out.
+            </p>
+          </div>
+          <div>
+            <p>
+              I’m open to conversations about software, Linux and systems, and AI research. Tell me what you’re working on.
+            </p>
+            <a class="button solid pixel-surface" data-invert-surface href="mailto:abhiramkondaguduru@gmail.com" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Write me an email<span aria-hidden="true">↗</span></span></a>
+            <p class="contact-address">
+              abhiramkondaguduru<wbr>@gmail.com
+            </p>
+            <a class="text-link contact-linkedin" href="https://www.linkedin.com/in/abhiram-kondaguduru" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-      </div>
-      <p class="section-footnote">Example story for this interface. Your own investigation will take its place.</p>
-    </section>
-
-    <section class="work section" id="work" aria-labelledby="work-title">
-      <div class="section-topline"><span><b>03</b> PROJECTS</span></div>
-      <div class="work-heading-row" data-reveal><h2 id="work-title">Selected work</h2><p>A closer look at the work.<br>What it took, what changed, what I learned.</p></div>
-      <details class="project featured" data-reveal>
-        <summary class="pixel-surface" data-pixels="follow">
-          <canvas aria-hidden="true"></canvas>
-          <div class="project-visual visual-one" aria-hidden="true"><span class="cover-index">01</span><svg class="cover-art architecture-art" data-pixel-occluder viewBox="0 0 500 360"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M115 135l135-78 135 78v150l-135 78-135-78z" transform="translate(0 -35)"/><path d="M115 100l135 78 135-78M250 178v150M160 74l135 78v150M205 48l135 78v150M115 150l135 78 135-78M115 200l135 78 135-78"/><path d="M160 126v150m45-124v150M250 78l-90 52m135-26l-90 52m135-26l-90 52M295 152l-45 26m90-52l-45 26" opacity=".35"/></g><g fill="currentColor"><path d="M250 178l45-26v50l-45 26z" opacity=".8"/><path d="M160 226l45 26v50l-45-26z" opacity=".28"/><rect x="247" y="175" width="6" height="6"/><rect x="112" y="97" width="6" height="6"/><rect x="382" y="97" width="6" height="6"/></g></svg></div>
-          <div class="project-copy" data-shield><span class="eyebrow">PROJECT</span><h3>[The build.]</h3><p>[Project title and a brief description of the problem you worked on.]</p><div class="project-meta"><span>AREA / YEAR</span><span class="project-open"><span class="when-closed">Show details</span><span class="when-open">Close details</span><i aria-hidden="true">↓</i></span></div></div>
-        </summary>
-        <div class="project-detail"><div><h4 class="eyebrow">THE PROBLEM</h4><p>A concrete question or constraint.</p></div><div><h4 class="eyebrow">THE APPROACH</h4><p>Your decisions and contribution.</p></div><div><h4 class="eyebrow">THE EVIDENCE</h4><p>An outcome, limitation, or lesson.</p></div></div>
-      </details>
-      <div class="project-pair" data-reveal>
-        <details class="project">
-          <summary class="pixel-surface" data-pixels="follow"><canvas aria-hidden="true"></canvas><div class="project-visual visual-two" aria-hidden="true"><span class="cover-index">02</span><svg class="cover-art research-art" data-pixel-occluder viewBox="0 0 500 320"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M40 72C140 -18 205 182 300 62S420 17 470 52"/><path d="M40 87C140 -3 205 197 300 77S420 32 470 67"/><path d="M40 102C140 12 205 212 300 92S420 47 470 82"/><path d="M40 117C140 27 205 227 300 107S420 62 470 97"/><path d="M40 132C140 42 205 242 300 122S420 77 470 112"/><path d="M40 147C140 57 205 257 300 137S420 92 470 127"/><path d="M40 162C140 72 205 272 300 152S420 107 470 142"/><path d="M40 177C140 87 205 287 300 167S420 122 470 157"/><path d="M40 192C140 102 205 302 300 182S420 137 470 172"/><path d="M40 207C140 117 205 317 300 197S420 152 470 187"/><path d="M40 222C140 132 205 332 300 212S420 167 470 202"/><path d="M40 237C140 147 205 347 300 227S420 182 470 217"/></g><path d="M250 25v270" stroke="currentColor" stroke-dasharray="2 7" opacity=".4"/></svg></div><div class="project-copy" data-shield><span class="eyebrow">RESEARCH</span><h3>[The investigation.]</h3><p>[A research question, your approach, and what the evidence showed.]</p><div class="project-meta"><span>AREA / YEAR</span><span class="project-open"><span class="when-closed">Show details</span><span class="when-open">Close details</span><i aria-hidden="true">↓</i></span></div></div></summary>
-          <div class="project-detail"><div><h4 class="eyebrow">THE QUESTION</h4><p>What you wanted to understand.</p></div><div><h4 class="eyebrow">THE LEARNING</h4><p>What the evidence actually showed.</p></div></div>
-        </details>
-        <details class="project">
-          <summary class="pixel-surface" data-pixels="follow"><canvas aria-hidden="true"></canvas><div class="project-visual visual-three" aria-hidden="true"><span class="cover-index">03</span><svg class="cover-art contribution-art" data-pixel-occluder viewBox="0 0 500 320"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M80 220h75V100h100v120h90V100h75M80 200h55V80h140v120h50V80h95M80 240h95V120h60v120h130V120h55"/><rect x="48" y="188" width="32" height="64"/><rect x="420" y="68" width="32" height="64"/></g><g fill="currentColor"><rect x="145" y="150" width="20" height="20"/><rect x="245" y="150" width="20" height="20"/><rect x="335" y="150" width="20" height="20"/></g></svg></div><div class="project-copy" data-shield><span class="eyebrow">CONTRIBUTION</span><h3>[The contribution.]</h3><p>[A contribution or experiment, and the specific change you made.]</p><div class="project-meta"><span>AREA / YEAR</span><span class="project-open"><span class="when-closed">Show details</span><span class="when-open">Close details</span><i aria-hidden="true">↓</i></span></div></div></summary>
-          <div class="project-detail"><div><h4 class="eyebrow">THE STARTING POINT</h4><p>The idea or limitation behind the work.</p></div><div><h4 class="eyebrow">THE RESULT</h4><p>A useful observation or next question.</p></div></div>
-        </details>
-      </div>
-      <details class="notebook" id="notebook" data-reveal>
-        <summary>
-          <span class="notebook-label">Notebook<small>Small experiments, notes, and unfinished questions</small></span>
-          <span class="notebook-action pixel-surface" data-pixels="clockwise"><canvas aria-hidden="true"></canvas><span data-shield><span class="when-closed">Open notebook</span><span class="when-open">Close notebook</span><i aria-hidden="true">↓</i></span></span>
-        </summary>
-        <div class="notebook-body"><p>[ A short note or experiment ]</p><p>[ An interesting failure or observation ]</p><p>[ A question still worth asking ]</p></div>
-      </details>
-    </section>
-
-    <section class="about section" id="about" aria-labelledby="about-title">
-      <div class="section-topline"><span><b>04</b> BACKGROUND</span></div>
-      <div class="about-grid" data-reveal><div><h2 id="about-title">About me</h2><div class="portrait-placeholder pixel-surface" data-pixels="follow"><canvas aria-hidden="true"></canvas><span class="portrait-frame" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M10 25V10h15m30 0h15v15m0 30v15H55m-30 0H10V55"/></svg></span><small data-shield>PORTRAIT PLACEHOLDER</small></div></div><div class="about-copy"><p class="about-lead">[A little about me,<br>in my own words.]</p><p>[Your background, the interests that connect your work, and what you’re curious about next.]</p><div class="context-row"><div><h3>What draws your attention</h3><p>[ Interests and questions you return to ]</p></div></div><div class="context-row"><div><h3>Where you are now</h3><p>[ Current work, study, or direction ]</p></div></div><div class="context-row"><div><h3>What comes next</h3><p>[ The kind of work you want to do ]</p></div></div></div></div>
-    </section>
-
-    <section class="contact section" id="contact" aria-labelledby="contact-title">
-      <div class="section-topline"><span><b>05</b> CONTACT</span></div>
-      <div class="contact-grid" data-reveal><h2 id="contact-title">Let’s talk.</h2><div><p>[What you’d like to work on next, and how someone can reach you.]</p><a class="button solid pixel-surface" data-invert-surface href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Find me on GitHub <span aria-hidden="true">↗</span></span></a><p class="contact-note">[ Your email address will go here. ]</p></div></div>
-      <footer class="site-footer"><a href="#top">ABHIRAM <span aria-hidden="true">↑</span></a><a href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></footer>
-    </section>
-  </main>
-</body>
+        <footer class="site-footer">
+          <a href="./index.html#top">ABHIRAM <span aria-hidden="true">↑</span></a><span>Systems, software &amp; AI research</span>
+        </footer>
+      </section>
+    </main>
+  </body>
 </html>
