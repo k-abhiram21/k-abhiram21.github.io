@@ -1,48 +1,41 @@
-# Portfolio interface draft
+# Abhiram — work & thinking
 
-A single static page built with HTML, CSS, and JavaScript. Project, biography, and email copy is placeholder content for layout review. The interactive DNS investigation is an explicitly illustrative example, not a claim about Abhiram’s work.
+A buildless, static portfolio for GitHub Pages. HTML, CSS, and JavaScript; local fonts; SVG/canvas visuals; no external runtime, analytics, or backend.
 
-## Preview locally
-
-From this directory:
+## Preview
 
 ```sh
 python3 -m http.server 8877 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8877`. No dependencies or build step are needed.
+Open `http://127.0.0.1:8877`. Changes appear on [GitHub Pages](https://k-abhiram21.github.io) after publication. No custom domain is configured.
 
-- `index.html` — page structure and placeholder content
-- `styles.css` — monochrome layout, responsive styles, and diagrams
-- `app.js` — story navigation, section tracking, and square pixel effects
-- `trails.js` — tapered section cursor and smooth text-selection paint
+## Pages
 
-The important surfaces follow the cursor. The secondary notebook button uses a clockwise brightness wave. Every surface shares a 2px / 8px square lattice and the same peak illumination. The hero favicon mark uses the same lattice, keeps its brightest ridges above the hover field, and links to the interactive story. Text, diagram labels, and project illustrations are masked from the decorative pixels. Reduced-motion preferences are supported.
+- `index.html` — introduction, an interaction across four fields of work, balanced project/research previews, About, and Contact
+- `projects.html` — StreamWatch and HeliVision, with links to full project stories
+- `streamwatch.html` — monitoring MongoDB and application health; architecture, workspace, and the query-context integration
+- `helivision.html` — motivation, camera-to-cue mechanism, and engineering across an unfamiliar platform
+- `research.html` — distinct chapters for uncertainty-based detection limits and adapter routing/verifier research
 
-Hover or focus a story step to change the text and move the diagram marker. Tapping and clicking remain available. There is no separate Next/Again control. The section rail moves one square between active sections with a continuous tapered tail.
+Shared presentation is in `styles.css`. `app.js` handles the homepage story, page/section navigation state, theme controls, visible-diagram motion, and square pixels. `trails.js` supplies the tapered section indicator and browser-owned text-selection trail.
 
-The light/dark toggle applies one palette to the entire page and saves the choice locally. Theme changes are immediate. The header and back-to-top control use opaque, readable renderings. An opposite-color rendering is clipped to the exact intersection with a contrasting accent surface as it scrolls underneath; there is no midpoint threshold or timed fade. With a uniform page theme, ordinary section boundaries do not trigger color flips. The fixed side identity and section index blend against clear page gutters.
+Each page contains native links and readable content without JavaScript. The homepage interaction enhances short examples; full stories are available on their own pages. Headers provide a visible Home link, project/research navigation, and a single fixed GitHub **profile** link. Relevant repository links appear only in the respective case studies. Contact has one email action and the owner-supplied LinkedIn URL.
 
-The interface draft is published on GitHub Pages at https://k-abhiram21.github.io. There is no custom-domain configuration.
+## Content direction
 
-Redundant edition, draft, and artwork labels are omitted. The original pixel fields, side navigation trail, scroll-responsive chrome, and hover-driven story remain.
+The introduction focuses on systems, Linux, AI engineering, and research. Breadth across software, observability, research, and one embedded project demonstrates adaptability. StreamWatch leads with MongoDB observability; query labels are one implementation decision. HeliVision explains the owner-approved anonymous motivation: partial vision loss from optic nerve damage making approaching traffic harder to notice. No family identity is disclosed.
 
-## Interface refinements
+Research descriptions focus on the problem, Abhiram’s contribution, engineering judgment, and lessons from the work. The broader framework remains credited to the team. The Phase 1 manuscript is submitted to KAIS, with editor. Research summaries and conceptual illustrations avoid unpublished implementation procedures, experimental records, and future research proposals. Private source documents remain outside this checkout.
 
-The story pairs each hover/focus/tap step with a diagnostic readout and synchronized diagram. Arrow keys move between steps. On mobile, controls precede the story content. Project cards retain cursor-following pixels; the notebook action retains clockwise illumination. Pixel geometry and text masks are cached, and offscreen fields skip animation frames. Section entrances run once, with reduced-motion fallbacks. Dark/light mode stays immediate. The contact action links to the confirmed GitHub profile; email remains a visible placeholder.
+Native disclosures add depth through problem framing, debugging practice, collaboration, and evaluation responsibilities. The homepage notes link directly to those sections and open the relevant disclosure on arrival. HeliVision and StreamWatch retain implementation notes drawn from their public repositories.
 
-## Visual direction
+## Visuals and motion
 
-Local Manrope and Instrument Serif fonts provide the typographic system (licenses in assets/fonts). The story uses an open SVG network map: requests follow the original path, expose a failed lookup, and reroute to an alternate resolver. Packet motion plays once per relevant step. Project covers are abstract SVG studies for build, research, and contribution placeholders; they do not represent project measurements. A featured project leads into two aligned project entries. Only the hero retains the serif accent; supporting text and navigation use a readable sans serif hierarchy.
+The front-view helmet schematic follows the public README’s visor layout: OLED at the lower centre of the visor, camera above, Raspberry Pi on top. The StreamWatch diagram separates the application/data path from the metrics path; Grafana panels return to the workspace. Research diagrams explain agreement versus correctness and the reasoning from a question through evidence to a decision.
 
-## Interface clarity
+SVG motion is lightweight: moving flow segments, a visor scan, OLED emphasis, and sampled-answer emphasis. IntersectionObserver pauses offscreen/hidden diagrams; reduced-motion preferences give a still view. These are explanatory schematics.
 
-Section titles, disclosure arrows, and supporting copy have a clear hierarchy. Project details use downward disclosure arrows; in-page links use downward arrows; external GitHub links retain outward arrows. The notebook has one native disclosure with a clockwise pixel action. Section numbers match the fixed index, and anchor offsets account for the sticky header. Redundant decorative labels and repeated About counters are removed. Pixel surfaces, story hover/focus/tap behavior, section reveals, the scroll indicator, fixed-control color wipes, and instant theme switching remain.
+The intentional interaction system remains: 2px square pixels on an 8px lattice, shared illumination intensity, cursor-following primary surfaces, a clockwise secondary notebook action, text masking, a favicon hero mark, section reveals, fixed-control color wipes, and instant page-wide light/dark themes. Pixel geometry is cached, and frames stop when idle or offscreen.
 
-## Cursor trails
-
-The section rail uses a quick square head and a slower taper that settles into the active section box. Text selection keeps the browser-owned range and normal copy/context-menu behavior; a pointer-transparent SVG layer paints smoothly moving selection edges. It inverts both text and background to preserve contrast. Wrapped lines and backward selection are handled separately; selection paint stays attached during scrolling. Keyboard selection, touch selection, reduced motion, forced colors, unsupported blending, and very large ranges retain native highlighting. Animation frames stop when the trails settle. No custom global mouse cursor or animation library is used.
-
-## Touch interaction
-
-On phone layouts a fixed bottom bar links to Top, Process, Work, About, and Contact; safe-area padding reserves space for system gestures and the footer. A compact header holds the brand and theme toggle. Top navigation replaces the floating return button on phones so it cannot cover diagram labels. The story step controls stay below that header while its content scrolls, and tap instructions replace hover instructions. Project and notebook disclosures retain visible action labels. Mouse hover stays available on capable devices. Pixel feedback starts at the finger position and remains briefly after a quick tap; movement beyond 10px, a cancelled pointer, or a second finger cancels it so scrolling and pinch zoom stay native. The selection trail retains native touch handles.
+Phone layouts provide five fixed bottom navigation links and safe-area spacing. Homepage steps support tap, mouse hover, focus, and arrow keys; sticky step taps bring an explanation back into view if necessary. Text selection retains normal browser copying and native touch/keyboard fallbacks. No global custom cursor or theme-transition overlay is used.
