@@ -627,3 +627,44 @@ h1 em{letter-spacing:-.025em;margin-left:.025em}
 @media(max-width:450px){.hero-note-description{min-height:12.95em}}
 @media(max-width:370px){.notebook-opening h1{font-size:35px}.hero-note{gap:14px;padding-right:17px}.hero-note h2{font-size:25px;min-height:4.2em}.hero-note .eyebrow{font-size:9px}.hero-note-description{font-size:14px;min-height:12.95em}}
 @media(prefers-reduced-motion:reduce){.hero-note{transform:none!important;transition:none!important}}
+
+/* Professional context stays close to the work, with room for plain text. */
+.experience-entry{border-top:1px solid var(--line);padding-top:23px;margin-top:28px}
+.experience-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.experience-heading h3{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.experience-date{font:11px/1.8 var(--mono);color:var(--muted)}
+.experience-company{font-size:15px;line-height:1.8;margin-top:8px}
+.experience-affiliation{font-size:12px;line-height:1.8;color:var(--muted)}
+.experience-entry>p:last-of-type{font-size:14px;line-height:1.85;color:var(--muted);margin-top:18px;max-width:54ch}
+.experience-entry .text-link{font-size:12px;margin-top:13px;min-height:44px}
+.profile-details{display:grid;grid-template-columns:1fr 1fr;gap:10%;margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
+.profile-details h3{font-size:21px;font-weight:550;line-height:1.5;letter-spacing:-.025em;margin-bottom:22px}
+.skills-list{margin:0}
+.skills-list>div{padding:14px 0;border-bottom:1px solid var(--line)}
+.skills-list dt{font-size:12px;line-height:1.8;color:var(--muted);margin-bottom:5px}
+.skills-list dd{margin:0;font-size:14px;line-height:1.85}
+.skills-context{font-size:12px;line-height:1.9;color:var(--muted);margin-top:20px}
+.skills-context a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.recognition-entry+.recognition-entry{margin-top:25px;padding-top:23px;border-top:1px solid var(--line)}
+.recognition-entry .eyebrow{font-size:9px;line-height:1.8}
+.recognition-entry h4{font-size:17px;font-weight:550;line-height:1.6;letter-spacing:-.02em;margin:9px 0}
+.recognition-entry>p:last-child{font-size:14px;line-height:1.85;color:var(--muted);max-width:49ch}
+.recognition-overview>.text-link{margin-top:16px;font-size:12px;min-height:44px}
+.patent-number{font-variant-numeric:tabular-nums;white-space:nowrap}
+.research-affiliation{display:flex;justify-content:space-between;gap:12px 28px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px;margin-top:30px}
+.research-affiliation p{font-size:12px;line-height:1.85;color:var(--muted)}
+.patent-record{border-left:2px solid var(--ink);padding:4px 0 4px 24px;margin-top:36px;max-width:78ch}
+.patent-record h2{font-size:clamp(23px,2.3vw,29px);font-weight:550;line-height:1.4;letter-spacing:-.025em;margin:10px 0}
+.patent-record>p:not(.eyebrow){font-size:14px;line-height:1.85;color:var(--muted)}
+.patent-record .patent-dates{font-size:12px!important;margin-top:5px}
+.patent-record .text-link{font-size:12px;margin-top:8px;min-height:44px}
+@media(max-width:700px){
+ .experience-heading{gap:6px}.experience-date{font-size:10px}
+ .profile-details{grid-template-columns:1fr;gap:35px;margin-top:32px;padding-top:28px}
+ .profile-details h3{font-size:20px;margin-bottom:15px}
+ .skills-list dd,.recognition-entry>p:last-child,.experience-entry>p:last-of-type{font-size:15px}
+ .research-affiliation{gap:8px;margin-top:26px;padding-top:18px}
+ .research-affiliation p{font-size:11px}
+ .patent-record{padding-left:18px;margin-top:28px}
+ .patent-record>p:not(.eyebrow){font-size:13px}
+}

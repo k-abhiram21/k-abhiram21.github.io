@@ -60,10 +60,10 @@
           EMBEDDED VISION / TEAM PROJECT
         </p>
         <h1>
-          Bring the missed<br>vehicle into <em>view.</em>
+          A helmet that<br>points out <em>traffic.</em>
         </h1>
         <p class="page-description">
-          HeliVision turns camera detections into simple visual and spoken cues. It began with seeing how partial vision loss can make road navigation harder, and became a working camera-to-cue helmet prototype.
+          I built the software for a helmet prototype that uses a camera to detect vehicles and show their positions on a small display, with spoken warnings.
         </p>
         <div class="case-facts">
           <div>
@@ -78,7 +78,22 @@
               Raspberry Pi · Python · TensorFlow Lite
             </p>
           </div>
+          <div>
+            <span>Timeframe</span>
+            <p><time datetime="2025">2025</time> · Team prototype</p>
+          </div>
+          <div>
+            <span>Recognition</span>
+            <p>2nd prize · Prakalp-2025, KMIT</p>
+          </div>
         </div>
+        <article class="patent-record" id="recognition" aria-labelledby="patent-title">
+          <p class="eyebrow">HELIVISION / INTELLECTUAL PROPERTY</p>
+          <h2 id="patent-title">Published patent application</h2>
+          <p>Indian application <span class="patent-number">202541100066</span> · Under examination</p>
+          <p class="patent-dates">Filed <time datetime="2025-10-16">16 October 2025</time> · Published <time datetime="2025-11-28">28 November 2025</time></p>
+          <a class="text-link" href="https://github.com/k-abhiram21/helivision#intellectual-property" target="_blank" rel="noreferrer">Application details in the project README <span aria-hidden="true">↗</span></a>
+        </article>
         <div class="chapter-links">
           <a href="#origin">The idea ↓</a><a href="#mechanism">How it works ↓</a><a href="#building">Building it ↓</a>
         </div>
@@ -89,17 +104,17 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            Help notice what’s<br>easy to miss.
+            Where the idea came from.
           </h2>
           <div class="prose">
             <p>
-              The idea began with a real situation: seeing how partial vision loss from optic nerve damage could make it difficult to notice vehicles approaching from one side, especially at night. A person could be looking at the road and still miss part of what was happening around them.
+              I’d seen how partial vision loss from optic nerve damage could make vehicles on one side difficult to notice, especially at night. It made me wonder whether a camera could help draw attention to them.
             </p>
             <p>
-              I wondered whether a helmet-mounted camera could notice those vehicles and draw attention to their position. Instead of showing another full video feed, it would turn detections into simple spatial cues on a small display, paired with audio.
+              My idea was to put that camera on a helmet and turn detections into a few simple cues: vehicle positions on a small display, with audio alongside them.
             </p>
             <p>
-              That question became HeliVision. I proposed the concept, then worked through the software and integration with my teammates.
+              I proposed the concept and led the coding and debugging. We built it as a team, sharing the hardware work.
             </p>
           </div>
         </div>
@@ -110,10 +125,10 @@
         </div>
         <div class="work-heading-row" data-reveal>
           <h2>
-            A glanceable signal,<br>close to the rider’s view.
+            From a camera frame<br>to a display cue.
           </h2>
           <p>
-            Camera detections become display positions and directional audio. The OLED sits at the lower edge of the visor.
+            The camera feeds a vehicle detector. Its output is mapped onto an OLED at the lower edge of the visor and paired with audio cues.
           </p>
         </div>
         <div class="case-figure helmet-stage pixel-surface" data-reveal data-pixels="follow" data-pixel-scroll>
@@ -144,7 +159,7 @@
           <div>
             <span>01 / CAPTURE</span>
             <h3>
-              Keep a recent frame.
+              Capture the frame.
             </h3>
             <p>
               A dedicated camera process supplies the latest view to the detector.
@@ -153,7 +168,7 @@
           <div>
             <span>02 / INTERPRET</span>
             <h3>
-              Locate the detection.
+              Find the vehicles.
             </h3>
             <p>
               TensorFlow Lite detections are mapped to horizontal regions and display coordinates.
@@ -162,7 +177,7 @@
           <div>
             <span>03 / COMMUNICATE</span>
             <h3>
-              Make the cue simple.
+              Show where they are.
             </h3>
             <p>
               The OLED, directional indicators, and spoken alerts translate the output into feedback.
@@ -176,20 +191,20 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            The real work was<br>between the components.
+            Getting the parts<br>to work together.
           </h2>
           <div class="prose">
             <p>
-              Getting from a camera frame to a useful cue meant learning the Raspberry Pi ecosystem while building with it. Camera interfaces, OS versions, Python dependencies, and the display each brought their own assumptions.
+              I was learning the Raspberry Pi ecosystem while building the prototype. We ran into OS and Python library compatibility issues, and the first text LCD didn’t work with our setup.
             </p>
             <p>
-              I adapted the camera and display stack, separated frame capture from inference, and added automatic image-history management for the Pi’s limited storage. Those changes helped turn individual components into a working pipeline.
+              We switched to a small OLED, which let us show vehicle positions. I also separated camera capture from detection and added image cleanup so saved outputs wouldn’t fill the Pi’s storage.
             </p>
             <p>
-              The prototype combined local inference, coordinate mapping, and multimodal feedback. In basic outdoor checks, it detected both parked and moving vehicles.
+              We carried the helmet on a road walk to try it outdoors. It detected parked vehicles as well as vehicles passing by.
             </p>
             <p class="contribution-note">
-              I led the software and debugging, using LLM tools along the way. Hardware integration was shared with teammates.
+              I wrote most of the code and handled most of the debugging, with help from LLM tools. My teammates and I shared the hardware connections and assembly.
             </p>
           </div>
         </div>
@@ -200,28 +215,28 @@
           </summary>
           <div class="technical-body">
             <h3>
-              Resolve the camera stack first.
+              Getting a camera feed.
             </h3>
             <p>
-              Part of the debugging was finding which layer was failing. The older camera path depended on legacy Raspberry Pi libraries; the final capture service uses Picamera2. Getting the OS, camera interface, and Python environment to agree gave the detector a dependable input to work with.
+              The camera code initially depended on older Raspberry Pi libraries. I worked through the OS and Python compatibility issues and moved the final capture service to Picamera2. That gave us a recent frame the detector could read.
             </p>
             <h3>
-              Separate capture from inference.
+              The handoff to the detector.
             </h3>
             <p>
-              <code>camera_service.py</code> updates a shared latest-frame image. <code>vehicle_detection.py</code> consumes that input independently and runs the TensorFlow Lite detector. This keeps the handoff simple: the camera supplies a recent view without building an ever-growing archive of input frames.
+              camera_service.py updates a shared latest-frame image. <code>vehicle_detection.py</code> reads it independently and runs TensorFlow Lite inference. Overwriting that input kept capture separate from detection without continuously saving every incoming frame.
             </p>
             <h3>
-              Translate detections into positions.
+              Mapping a vehicle onto the display.
             </h3>
             <p>
-              The detector takes each bounding box’s centre, maps it into the OLED’s coordinate space, and groups it into horizontal regions. Small marks on the display, directional indicators, and spoken alerts give the detection a position the rider can understand. Moving from the text LCD to the OLED also made that spatial representation possible.
+              I used the centre of each detected bounding box to map vehicles into the OLED’s coordinates and horizontal regions. The display marks their positions, while directional indicators and spoken alerts provide additional cues. The OLED made this spatial view possible.
             </p>
             <h3>
-              Make the pipeline manageable on the Pi.
+              Keeping saved images under control.
             </h3>
             <p>
-              A separate cleanup service prunes recent saved detection images. Those images remain useful for debugging, while automatic history management limits their storage footprint during a run. Keeping capture, detection, and cleanup as separate services made it easier to locate problems during integration.
+              Detection outputs were useful while debugging, but we couldn’t keep saving them indefinitely. I added a cleanup service that keeps a recent buffer and deletes older outputs. Having capture, detection, and cleanup in separate services also made it easier to find where something had gone wrong.
             </p>
           </div>
         </details>

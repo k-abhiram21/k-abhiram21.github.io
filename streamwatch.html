@@ -60,10 +60,10 @@
           DATABASE OBSERVABILITY / FULL-STACK PROJECT
         </p>
         <h1>
-          Unstructured data.<br>A clearer <em>view.</em>
+          Monitoring<br>a MongoDB <em>application.</em>
         </h1>
         <p class="page-description">
-          StreamWatch is a monitoring workspace for MongoDB-backed applications. It brings database exploration, application metrics, and dashboard visualizations together so the system’s state is easier to understand.
+          StreamWatch puts MongoDB data exploration, application metrics, and Grafana dashboards in one workspace. We also added a way to ask questions about the data in plain language.
         </p>
         <div class="case-facts">
           <div>
@@ -78,6 +78,14 @@
               React · FastAPI · MongoDB · Prometheus · Grafana
             </p>
           </div>
+          <div>
+            <span>Timeframe</span>
+            <p><time datetime="2025">2025</time> · Team project</p>
+          </div>
+          <div>
+            <span>My focus</span>
+            <p>Instrumentation, monitoring integration, and the React workspace</p>
+          </div>
         </div>
         <div class="chapter-links">
           <a href="#problem">The question ↓</a><a href="#architecture">Architecture ↓</a><a href="#integration">Integration ↓</a>
@@ -89,14 +97,14 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            Flexible data.<br>Clearer monitoring.
+            What’s happening<br>inside the application?
           </h2>
           <div class="prose">
             <p>
-              MongoDB gives an application room to work with document data. But understanding the running system still takes a deliberate monitoring layer: what is the application doing, how are requests behaving, and how can someone explore the data?
+              Our brief was to monitor an unstructured database. We needed a way to see what the MongoDB application was doing, follow request activity, and explore the data it held.
             </p>
             <p>
-              That was the main question behind StreamWatch. I worked across the application and monitoring stack to make that activity visible in a usable workspace.
+              I worked on instrumentation, the monitoring integration, and the frontend that brings those views together.
             </p>
           </div>
         </div>
@@ -107,7 +115,7 @@
         </div>
         <div class="work-heading-row" data-reveal>
           <h2>
-            Two paths.<br>One workspace.
+            Data and monitoring<br>take different paths.
           </h2>
           <p>
             Application data moves through FastAPI and MongoDB. Telemetry travels through Prometheus and Grafana.
@@ -137,7 +145,7 @@
               Application health
             </h3>
             <p>
-              Expose query traffic, packet-size distributions, and other operational signals through a metrics endpoint.
+              The application exposes query traffic, packet-size distributions, and other operational signals through a metrics endpoint.
             </p>
           </div>
           <div>
@@ -146,7 +154,7 @@
               Monitoring panels
             </h3>
             <p>
-              Collect telemetry with Prometheus and embed Grafana panels in the React workspace.
+              Prometheus collects the metrics. Grafana turns them into panels embedded in the React workspace.
             </p>
           </div>
           <div>
@@ -155,7 +163,7 @@
               AI-assisted querying
             </h3>
             <p>
-              Translate natural-language questions into MongoDB queries through the application’s AI interface.
+              The AI interface translates a plain-language question into a MongoDB query.
             </p>
           </div>
         </div>
@@ -166,17 +174,17 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            Give a metric<br>some context.
+            Getting query activity<br>into Grafana.
           </h2>
           <div class="prose">
             <p>
-              One requirement was to show query activity alongside monitoring data. The usual numeric metrics didn’t carry the context we wanted to display.
+              We were asked to show query activity alongside the monitoring data. Numeric metrics alone didn’t carry the context we wanted in Grafana.
             </p>
             <p>
-              I worked on custom application instrumentation to attach query context to a metric’s labels. That made a specific piece of application activity available to the visualization layer.
+              I worked on custom instrumentation that attached query context to metric labels, making it available to the dashboard.
             </p>
             <p>
-              It was one part of the larger observability problem. The broader work connected database operations, the API, instrumentation, dashboards, and a frontend where those pieces could be explored together.
+              Debugging it meant checking the whole path, from what the application exposed to what the panel actually displayed. This was one part of the wider MongoDB monitoring workspace.
             </p>
           </div>
         </div>
@@ -187,22 +195,22 @@
           </summary>
           <div class="technical-body">
             <h3>
-              Keep application data and telemetry distinct.
+              How the two paths connect.
             </h3>
             <p>
-              React talks to the FastAPI application, which connects to MongoDB. The AI-assisted path uses Gemini to turn a natural-language question into a MongoDB query. Monitoring is a separate path: the backend exposes numeric instrumentation at <code>/metrics</code>, Prometheus collects it, and Grafana turns it into panels.
+              React talks to the FastAPI application, which connects to MongoDB. For AI-assisted querying, Gemini translates the question into a MongoDB query. Monitoring follows a separate path: the backend exposes instrumentation at <code>/metrics</code>, Prometheus collects it, and Grafana produces the panels.
             </p>
             <h3>
-              Instrument the activity that matters.
+              What we instrumented.
             </h3>
             <p>
-              The backend defines client query traffic with user, client, and query-type labels, alongside a packet-size histogram. For AI query activity, a custom gauge carries the question, generated MongoDB query, result, and status in its labels. That was the bridge for showing query context beside the numeric signals; Prometheus remains the metrics collector.
+              The backend tracks client query traffic with user, client, and query-type labels, alongside a packet-size histogram. A custom gauge also carries the AI query’s question, generated MongoDB query, result, and status in its labels. That is how query context reaches the dashboard through the metrics pipeline.
             </p>
             <h3>
-              Bring the view back into the workspace.
+              Putting the panels in React.
             </h3>
             <p>
-              <code>MetricFrame.jsx</code> builds Grafana panel URLs from the dashboard, panel ID, and active theme. <code>Vitals.jsx</code> brings together panels for client traffic, packet-size distribution, system metrics, and query activity. The integration work spans both ends: exposing application context in a form the monitoring stack can collect, and configuring a frontend view that makes those signals accessible.
+              MetricFrame.jsx builds a Grafana panel URL from the dashboard, panel ID, and active theme. <code>Vitals.jsx</code> brings together panels for client traffic, packet-size distribution, system metrics, and query activity. I worked across that connection: exposing the application’s activity and making the resulting panels available in the workspace.
             </p>
           </div>
         </details>
