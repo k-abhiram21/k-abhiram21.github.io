@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="StreamWatch and HeliVision: observability, computer vision, and the engineering decisions behind the projects.">
-    <meta property="og:title" content="Projects — Abhiram">
+    <meta property="og:title" content="Projects — Abhiram Kondaguduru">
     <meta property="og:description" content="StreamWatch and HeliVision: observability, computer vision, and the engineering decisions behind the projects.">
+    <link rel="canonical" href="https://k-abhiram21.github.io/projects.html">
+    <meta name="author" content="Abhiram Kondaguduru">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://k-abhiram21.github.io/projects.html">
     <meta name="theme-color" content="#f1f1f1">
@@ -17,11 +19,11 @@
       ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       })();
     </script>
-    <title>Projects — Abhiram</title>
+    <title>Projects — Abhiram Kondaguduru</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="./styles.css?v=20261023.3">
-    <script src="./app.js?v=20261023.3" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261023.10">
+    <script src="./app.js?v=20261023.5" defer></script>
     <script src="./trails.js?v=20261023.1" defer></script>
   </head>
   <body data-page="projects">
@@ -32,6 +34,7 @@
         <a class="home-link" data-page-link="home" href="./index.html#top">Home</a><a data-page-link="projects" href="./projects.html">Projects</a><a data-page-link="research" href="./research.html">Research</a><a data-scroll-link href="./index.html#about">About</a><a data-scroll-link href="./index.html#contact">Contact</a>
       </nav>
       <div class="header-tools">
+        <a class="header-resume" href="./assets/documents/abhiram-kondaguduru-resume.pdf" download="Abhiram-Kondaguduru-Resume.pdf" aria-label="Download résumé (PDF)">Résumé <span aria-hidden="true">↓</span></a>
         <a class="profile-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" aria-label="Abhiram on GitHub">GitHub <span aria-hidden="true">↗</span></a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span></button>
       </div>
     </header>
@@ -60,10 +63,10 @@
           BUILDING &amp; DEBUGGING
         </p>
         <h1>
-          Projects I’ve built<br>with <em>a team.</em>
+          Selected<br><em>projects.</em>
         </h1>
         <p class="page-description">
-          I worked on MongoDB observability in StreamWatch and led the software for HeliVision, a helmet prototype built around a Raspberry Pi.
+          From a helmet that points out traffic to a workspace for understanding a database-backed app. These are the builds, the problems behind them, and the choices that made them work.
         </p>
         <div class="chapter-links">
           <a href="#streamwatch">01 / StreamWatch ↓</a><a href="#helivision">02 / HeliVision ↓</a>
@@ -79,13 +82,13 @@
               STREAMWATCH
             </p>
             <h2>
-              Monitoring MongoDB.
+              See what the<br>application is doing.
             </h2>
             <p>
-              We set out to monitor an unstructured database. StreamWatch brings MongoDB data exploration, application metrics, and Grafana panels into a React workspace.
+              MongoDB records show the data. Request rates, latency, and outcomes show how the app is using it. StreamWatch brings those views together so a problem has somewhere to be investigated.
             </p>
             <p class="role-line">
-              2025 · Monitoring, instrumentation &amp; integration
+              2025–2026 · React, FastAPI, MongoDB, Prometheus, Grafana
             </p>
             <a class="button solid pixel-surface" data-invert-surface href="./streamwatch.html" data-pixels="follow"><canvas aria-hidden="true"></canvas><span data-shield>Explore StreamWatch<span aria-hidden="true">↗</span></span></a>
           </div>
@@ -115,10 +118,10 @@
               HELIVISION
             </p>
             <h2>
-              A camera and cues<br>on a helmet.
+              Traffic cues within<br>the rider’s view.
             </h2>
             <p>
-              I’d seen how partial vision loss could make approaching traffic difficult to notice. I proposed a helmet-mounted camera that turns detections into visual and audio cues, and led the software work.
+              A Raspberry Pi prototype that turns camera detections into a small visual map and spoken alerts. The case study follows the idea through camera compatibility, display changes, and an outdoor walk test.
             </p>
             <p class="role-line">
               2025 · 2nd prize, Prakalp-2025 · Published patent application

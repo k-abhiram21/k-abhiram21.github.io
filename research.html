@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="LLM reliability and model routing research from Abhiram’s internship at LLMLens Paradigm, part of String of Pearls at K-Hub, KMIT.">
-    <meta property="og:title" content="Research — Abhiram">
+    <meta property="og:title" content="AI Research — Abhiram Kondaguduru">
     <meta property="og:description" content="LLM reliability and model routing research from Abhiram’s internship at LLMLens Paradigm, part of String of Pearls at K-Hub, KMIT.">
+    <link rel="canonical" href="https://k-abhiram21.github.io/research.html">
+    <meta name="author" content="Abhiram Kondaguduru">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://k-abhiram21.github.io/research.html">
     <meta name="theme-color" content="#f1f1f1">
@@ -17,11 +19,11 @@
       ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       })();
     </script>
-    <title>Research — Abhiram</title>
+    <title>AI Research — Abhiram Kondaguduru</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="./styles.css?v=20261023.3">
-    <script src="./app.js?v=20261023.3" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261023.10">
+    <script src="./app.js?v=20261023.5" defer></script>
     <script src="./trails.js?v=20261023.1" defer></script>
   </head>
   <body data-page="research">
@@ -32,6 +34,7 @@
         <a class="home-link" data-page-link="home" href="./index.html#top">Home</a><a data-page-link="projects" href="./projects.html">Projects</a><a data-page-link="research" href="./research.html">Research</a><a data-scroll-link href="./index.html#about">About</a><a data-scroll-link href="./index.html#contact">Contact</a>
       </nav>
       <div class="header-tools">
+        <a class="header-resume" href="./assets/documents/abhiram-kondaguduru-resume.pdf" download="Abhiram-Kondaguduru-Resume.pdf" aria-label="Download résumé (PDF)">Résumé <span aria-hidden="true">↓</span></a>
         <a class="profile-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" aria-label="Abhiram on GitHub">GitHub <span aria-hidden="true">↗</span></a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span></button>
       </div>
     </header>
@@ -63,7 +66,7 @@
           When should we<br>trust the <em>answer?</em>
         </h1>
         <p class="page-description">
-          I study LLM reliability as an AI research intern at LLMLens Paradigm. In Phase 1, I helped investigate the limits of uncertainty-based hallucination detection. I’m now working on routing, verification, and evaluation with the team.
+          My research at LLMLens Paradigm follows two questions: how much a model’s uncertainty tells us about correctness, and when a different response is worth using.
         </p>
         <div class="research-affiliation">
           <p>String of Pearls · K-Hub · KMIT</p>
@@ -88,13 +91,10 @@
         <div class="case-preview" data-reveal>
           <div class="prose">
             <p class="prose-lead">
-              I wanted to understand the limits of uncertainty-based hallucination detection.
+              A model can repeat the same wrong answer.
             </p>
             <p>
-              We studied whether signals from a model’s answers could distinguish correct responses from hallucinations, across different models and tasks.
-            </p>
-            <p>
-              Repeated answers can agree and still be wrong. I helped investigate where uncertainty signals are useful and where they stop separating the two.
+              That makes response consistency an interesting signal, but an incomplete one. The study examines how well uncertainty signals distinguish correct answers from hallucinations across model and task settings.
             </p>
           </div>
           <div class="case-figure pixel-surface" data-pixels="follow" data-pixel-scroll>
@@ -116,7 +116,7 @@
             MY CONTRIBUTION
           </p>
           <p>
-            I contributed to the research question, methodology, software, formal analysis, and manuscript writing with the team.
+            First author; research question, methodology, experiment software, analysis, and manuscript writing, with coauthors and supervision.
           </p>
         </div>
         <div class="paper-record" data-reveal>
@@ -134,24 +134,12 @@
             How I approached the investigation <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">
-            <h3>
-              The question we studied.
-            </h3>
-            <p>
-              I was interested in how much we can learn from a model’s uncertainty about its own answers. A detection method may work in one setting and become less informative in another. We wanted to understand that limit.
-            </p>
-            <h3>
-              My work on the experiments.
-            </h3>
-            <p>
-              I helped develop the methodology, wrote software, and worked on the analysis. We compared behaviour across different settings and used the results to examine the question. Debugging and interpreting the experiments were both part of that work.
-            </p>
-            <h3>
-              Writing the paper.
-            </h3>
-            <p>
-              I also worked on the manuscript: explaining why we asked the question, how we investigated it, and what the findings support. The paper is currently with an editor at Knowledge and Information Systems.
-            </p>
+            <h3>Check the setup.</h3>
+            <p>A detector score is only as useful as the comparison behind it. I checked the experiment code, reference labels, and scoring behavior before interpreting differences between methods. This helped separate an issue in the evaluation from a pattern worth studying.</p>
+            <h3>Examine difficult cases.</h3>
+            <p>Incorrect answers with reassuring signals were especially useful to inspect. The analysis asked how those cases behaved across settings, and which observations held beyond a single comparison.</p>
+            <h3>Write what the evidence supports.</h3>
+            <p>The manuscript connects each finding to the conditions under which it was measured. The analysis and writing focused on making those conditions clear enough for a reader to assess the conclusion.</p>
           </div>
         </details>
       </section>
@@ -161,7 +149,7 @@
         </div>
         <div class="research-title" data-reveal>
           <p class="eyebrow">
-            MAKING MORE CONSIDERED MODEL DECISIONS
+            ROUTING IMPLEMENTATION &amp; EVALUATION
           </p>
           <h2>
             When should we use<br>a different answer?
@@ -170,13 +158,10 @@
         <div class="case-preview reverse" data-reveal>
           <div class="prose">
             <p class="prose-lead">
-              My part of the project is routing: deciding when to use another model’s response.
+              The same specialist can help on one request and hurt on another.
             </p>
             <p>
-              The wider framework is a team effort. I work on the routing implementation, debugging, verification, and the tools we use to evaluate it.
-            </p>
-            <p>
-              I’m interested in whether the extra model helps with the task, and whether we can understand why the system made its choice.
+              The question is when switching improves the answer for the current task, and what evidence supports that decision.
             </p>
           </div>
           <div class="case-figure pixel-surface" data-pixels="follow" data-pixel-scroll>
@@ -200,114 +185,78 @@
             MY CONTRIBUTION / ROUTING
           </p>
           <p>
-            Routing implementation, debugging, verification, and evaluation tooling within the team’s research framework.
+            Routing implementation and debugging, including verification and evaluation tooling. The wider framework is shared research work.
           </p>
         </div>
         <div class="mechanism-steps" data-reveal>
           <div>
             <span>FRAME</span>
             <h3>
-              Define the choice.
+              What changes?
             </h3>
             <p>
-              Is another model’s answer useful for this task, rather than just relevant to its topic?
+              Compare the answer returned before and after a routing decision.
             </p>
           </div>
           <div>
             <span>INVESTIGATE</span>
             <h3>
-              Look at what happened.
+              What does it cost?
             </h3>
             <p>
-              Trace a decision through the implementation and work out why it behaved that way.
+              Account for the generation and checking needed to make that choice.
             </p>
           </div>
           <div>
             <span>REFINE</span>
             <h3>
-              Check the change.
+              What if it fails?
             </h3>
             <p>
-              Use the evaluation to see whether the next version addresses the problem.
+              Include the fallback path when checking the system’s behavior.
             </p>
           </div>
         </div>
         <details class="technical-note" id="routing-policy">
           <summary class="pixel-surface" data-pixels="follow" data-pixel-strength="0.65">
             <canvas aria-hidden="true"></canvas>
-            How I shaped the routing question <span aria-hidden="true">↓</span>
+            From the research question to working code <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">
-            <h3>
-              The routing question.
-            </h3>
-            <p>
-              A model may recognise the topic without improving the answer. My work focuses on the decision to use its response. I want the routing behaviour to connect to what the task needs, rather than treating a plausible-looking answer as enough.
-            </p>
-            <h3>
-              What I work on.
-            </h3>
-            <p>
-              I implement and debug the routing code, work on verification, and build evaluation tools. That means moving between the research question and the implementation: reading what the code actually does, checking its behaviour, and working through changes with the team.
-            </p>
-            <h3>
-              Working within the team.
-            </h3>
-            <p>
-              Routing sits within a larger framework developed by the team. I need to understand the components around it to connect my work properly, while keeping my own responsibility clear. The broader research idea and framework are shared work.
-            </p>
+            <h3>Agree on the decision.</h3>
+            <p>The router, verifier, and serving path need a common understanding of a routing outcome. I work on the interfaces between them so that the response selected by the code matches the decision recorded for evaluation.</p>
+            <h3>Follow the selected answer.</h3>
+            <p>A decision is more than a score in a log. I trace which response reaches the caller and how verification affects that path. This makes mismatches between a component’s output and the system’s final behavior easier to locate.</p>
+            <h3>Keep fallback behavior explicit.</h3>
+            <p>When a path cannot be used, the remaining choice needs to be well defined. I include those cases in implementation checks so that handling a failure remains part of the decision layer.</p>
           </div>
         </details>
         <details class="technical-note" id="routing-verifier">
           <summary class="pixel-surface" data-pixels="follow" data-pixel-strength="0.65">
             <canvas aria-hidden="true"></canvas>
-            What debugging taught me about model decisions <span aria-hidden="true">↓</span>
+            Debugging the decision layer <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">
-            <h3>
-              When the output looks right.
-            </h3>
-            <p>
-              A response can sound convincing without helping with the task. In the routing and verification work, I spend time looking at these cases and asking what led to the choice. Reading the output is a starting point; understanding the decision takes more investigation.
-            </p>
-            <h3>
-              Working back through the code.
-            </h3>
-            <p>
-              I trace the relevant implementation and check the assumptions around it. Is the code behaving as intended? Does the intended behaviour address the problem? Keeping those questions separate helps me decide whether I’m fixing a bug or revisiting an idea.
-            </p>
-            <h3>
-              What that changes.
-            </h3>
-            <p>
-              The debugging and verifier work feed back into the next iteration. They help me identify what needs another check and where the system’s behaviour is difficult to explain. I work with the team to turn those observations into changes we can evaluate.
-            </p>
+            <h3>Reproduce the unexpected choice.</h3>
+            <p>I start with the request and follow its path through the code. The aim is to establish which components ran, what each returned, and where the final choice diverged from the intended behavior.</p>
+            <h3>Separate code from assumptions.</h3>
+            <p>A bug calls for a correction; an assumption calls for an experiment. Establishing which one caused the result keeps the next change focused. It also helps explain why a plausible-looking output is not enough to judge the implementation.</p>
+            <h3>Check the correction.</h3>
+            <p>Once the cause is understood, I use focused checks to see whether the change addresses it and whether nearby paths still behave as expected. Verifier integration and failure handling are part of that review.</p>
           </div>
         </details>
         <details class="technical-note" id="routing-benchmark">
           <summary class="pixel-surface" data-pixels="follow" data-pixel-strength="0.65">
             <canvas aria-hidden="true"></canvas>
-            How I make the work easier to evaluate <span aria-hidden="true">↓</span>
+            Building and checking the evaluation tools <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">
-            <h3>
-              What are we comparing?
-            </h3>
-            <p>
-              I work on the evaluation code as well as the router. I need to understand what each comparison measures and how it relates to the question we started with. A number on its own doesn’t tell me whether the change did what we wanted.
-            </p>
-            <h3>
-              Checking the evaluation code.
-            </h3>
-            <p>
-              I debug the machinery we use to study model behaviour and tighten its checks. When a result looks unusual, that code is part of what needs investigating. An implementation issue can change what an experiment appears to show.
-            </p>
-            <h3>
-              Looking at the added work.
-            </h3>
-            <p>
-              Using another component has a cost as well as a possible benefit. I’m interested in whether it helps enough to justify the added work and how it fits with the rest of the system. That’s an engineering question alongside the research one.
-            </p>
+            <h3>Compare the same task.</h3>
+            <p>Routing needs to be assessed against the base response under comparable conditions. I work on evaluation code that keeps the inputs, selected outputs, and scoring aligned, so a result can be traced back to the choice that produced it.</p>
+            <h3>Inspect unusual measurements.</h3>
+            <p>If a result changes unexpectedly, the evaluation machinery is one of the places I inspect. Data handling and scoring errors can change a comparison before the routing logic has improved at all.</p>
+            <h3>Include the cost of the choice.</h3>
+            <p>Generating another response or adding a verifier takes work. The evaluation needs to account for that effort alongside answer quality, so the comparison reflects what the system actually had to do.</p>
           </div>
         </details>
       </section>
@@ -317,14 +266,11 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            What I’m working on now.
+            The next question.
           </h2>
           <div class="prose">
             <p>
-              I’m continuing the routing work with the team, spending time on implementation, debugging, and evaluation. I want to get better at understanding the system around a model, as well as the model’s answers.
-            </p>
-            <p>
-              The research gives me a reason to keep moving between code, experiments, and writing.
+              I’m studying when additional verification changes an answer enough to justify its cost. That question connects the implementation work to the evaluation.
             </p>
             <a class="text-link" href="./index.html#contact">Talk research with me <span aria-hidden="true">↗</span></a>
           </div>

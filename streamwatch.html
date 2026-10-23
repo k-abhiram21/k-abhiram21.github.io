@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="Monitoring MongoDB and application health with StreamWatch: React, FastAPI, Prometheus, Grafana, and AI-assisted data exploration.">
-    <meta property="og:title" content="StreamWatch — Abhiram">
+    <meta property="og:title" content="StreamWatch — Abhiram Kondaguduru">
     <meta property="og:description" content="Monitoring MongoDB and application health with StreamWatch: React, FastAPI, Prometheus, Grafana, and AI-assisted data exploration.">
+    <link rel="canonical" href="https://k-abhiram21.github.io/streamwatch.html">
+    <meta name="author" content="Abhiram Kondaguduru">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://k-abhiram21.github.io/streamwatch.html">
     <meta name="theme-color" content="#f1f1f1">
@@ -17,12 +19,13 @@
       ? theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       })();
     </script>
-    <title>StreamWatch — Abhiram</title>
+    <title>StreamWatch — Abhiram Kondaguduru</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="preload" href="./assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="./styles.css?v=20261023.3">
-    <script src="./app.js?v=20261023.3" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261023.10">
+    <script src="./app.js?v=20261023.5" defer></script>
     <script src="./trails.js?v=20261023.1" defer></script>
+    <script src="./evidence.js?v=20261023.1" defer></script>
   </head>
   <body data-page="projects">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -32,6 +35,7 @@
         <a class="home-link" data-page-link="home" href="./index.html#top">Home</a><a data-page-link="projects" href="./projects.html">Projects</a><a data-page-link="research" href="./research.html">Research</a><a data-scroll-link href="./index.html#about">About</a><a data-scroll-link href="./index.html#contact">Contact</a>
       </nav>
       <div class="header-tools">
+        <a class="header-resume" href="./assets/documents/abhiram-kondaguduru-resume.pdf" download="Abhiram-Kondaguduru-Resume.pdf" aria-label="Download résumé (PDF)">Résumé <span aria-hidden="true">↓</span></a>
         <a class="profile-link" href="https://github.com/k-abhiram21" target="_blank" rel="noreferrer" aria-label="Abhiram on GitHub">GitHub <span aria-hidden="true">↗</span></a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true"></span><span class="theme-label">Dark</span></button>
       </div>
     </header>
@@ -63,13 +67,16 @@
           Monitoring<br>a MongoDB <em>application.</em>
         </h1>
         <p class="page-description">
-          StreamWatch puts MongoDB data exploration, application metrics, and Grafana dashboards in one workspace. We also added a way to ask questions about the data in plain language.
+          Inspect MongoDB records, ask a question about them, and follow the activity those requests create. StreamWatch connects data exploration with the health of the application around it.
         </p>
+        <div class="source-row">
+          <span>Application source and monitoring architecture</span><a class="text-link" href="https://github.com/k-abhiram21/streamwatch" target="_blank" rel="noreferrer">StreamWatch repository <span aria-hidden="true">↗</span></a>
+        </div>
         <div class="case-facts">
           <div>
             <span>The question</span>
             <p>
-              How do we monitor an unstructured database?
+              How do we understand a document database and the app using it?
             </p>
           </div>
           <div>
@@ -80,7 +87,7 @@
           </div>
           <div>
             <span>Timeframe</span>
-            <p><time datetime="2025">2025</time> · Team project</p>
+            <p><time datetime="2025">2025</time>–2026 · Full-stack application</p>
           </div>
           <div>
             <span>My focus</span>
@@ -88,7 +95,7 @@
           </div>
         </div>
         <div class="chapter-links">
-          <a href="#problem">The question ↓</a><a href="#architecture">Architecture ↓</a><a href="#integration">Integration ↓</a>
+          <a href="#problem">The question ↓</a><a href="#architecture">Architecture ↓</a><a href="#workspace-evidence">See it running ↓</a><a href="#integration">Integration ↓</a>
         </div>
       </section>
       <section class="section case-chapter" id="problem">
@@ -97,15 +104,16 @@
         </div>
         <div class="narrative-split" data-reveal>
           <h2>
-            What’s happening<br>inside the application?
+            Why the records<br>aren’t the whole story.
           </h2>
           <div class="prose">
             <p>
-              Our brief was to monitor an unstructured database. We needed a way to see what the MongoDB application was doing, follow request activity, and explore the data it held.
+              MongoDB’s document model supports nested structures and optional fields. That flexibility is useful as data changes, but inspecting a collection only tells you what is stored.
             </p>
             <p>
-              I worked on instrumentation, the monitoring integration, and the frontend that brings those views together.
+              You also need to understand how the application uses that data: which requests arrive, how long responses take, and where failures occur. Those signals give you a starting point for investigating a problem while it is happening.
             </p>
+            <p>A slow sensor-reading request is a simple example. The document alone cannot explain the delay; request activity and timing help narrow down where to look. That need shaped the workspace.</p>
           </div>
         </div>
       </section>
@@ -118,7 +126,7 @@
             Data and monitoring<br>take different paths.
           </h2>
           <p>
-            Application data moves through FastAPI and MongoDB. Telemetry travels through Prometheus and Grafana.
+            FastAPI is the junction: it serves data to React and exposes an instrumentation endpoint for Prometheus. Grafana turns that second path into a view of activity over time.
           </p>
         </div>
         <div class="case-figure wide-figure pixel-surface" data-reveal data-pixels="follow" data-pixel-scroll>
@@ -145,7 +153,7 @@
               Application health
             </h3>
             <p>
-              The application exposes query traffic, packet-size distributions, and other operational signals through a metrics endpoint.
+              Request counts, response timings, and outcomes help show whether the application is keeping up with the work it receives.
             </p>
           </div>
           <div>
@@ -154,7 +162,7 @@
               Monitoring panels
             </h3>
             <p>
-              Prometheus collects the metrics. Grafana turns them into panels embedded in the React workspace.
+              Time-series panels make changes in traffic and response behavior visible across a session, alongside host resource use.
             </p>
           </div>
           <div>
@@ -163,9 +171,32 @@
               AI-assisted querying
             </h3>
             <p>
-              The AI interface translates a plain-language question into a MongoDB query.
+              The generated MongoDB query stays visible beside its results, so the answer can be inspected.
             </p>
           </div>
+        </div>
+        <div class="project-media" id="workspace-evidence" aria-labelledby="workspace-evidence-title">
+          <div class="media-intro">
+            <h2 id="workspace-evidence-title">Explore the data.<br>See the activity.</h2>
+            <p>One local session, viewed through a query result and the activity recorded by the monitoring stack.</p>
+          </div>
+          <div class="media-pair workspace-media">
+            <figure>
+              <a class="media-image app-capture" href="./assets/streamwatch/query-workspace.png" data-image-viewer data-image-title="StreamWatch · AI Analyst workspace" aria-label="Enlarge the AI Analyst screenshot">
+                <img src="./assets/streamwatch/query-result.webp" width="464" height="260" loading="lazy" decoding="async" alt="AI Analyst result showing a temperature-above-50 filter in MongoDB JSON and a plain-language summary of matching sensor records.">
+                <span class="media-expand" aria-hidden="true">Full workspace ↗</span>
+              </a>
+              <figcaption><span class="media-label">01 / ASK &amp; INSPECT</span>A temperature question, the generated filter, and a plain-language summary of the returned records. The query stays visible for inspection.</figcaption>
+            </figure>
+            <figure>
+              <a class="media-image dashboard-capture" href="./assets/streamwatch/monitoring-dashboard.png" data-image-viewer data-image-title="StreamWatch · local monitoring dashboard" aria-label="Enlarge the full Grafana dashboard screenshot">
+                <img src="./assets/streamwatch/monitoring-focus.webp" width="695" height="343" loading="lazy" decoding="async" alt="Selected Grafana panels showing host CPU and RAM gauges above an application-queries-per-minute chart.">
+                <span class="media-expand" aria-hidden="true">Full dashboard ↗</span>
+              </a>
+              <figcaption><span class="media-label">02 / FOLLOW THE ACTIVITY</span>Application query traffic alongside CPU and RAM for the machine running this local session.</figcaption>
+            </figure>
+          </div>
+          <p class="media-footnote">Selected panels are grouped for readability. Open an image for its full screenshot.</p>
         </div>
       </section>
       <section class="section case-chapter" id="integration">
@@ -177,15 +208,8 @@
             Getting query activity<br>into Grafana.
           </h2>
           <div class="prose">
-            <p>
-              We were asked to show query activity alongside the monitoring data. Numeric metrics alone didn’t carry the context we wanted in Grafana.
-            </p>
-            <p>
-              I worked on custom instrumentation that attached query context to metric labels, making it available to the dashboard.
-            </p>
-            <p>
-              Debugging it meant checking the whole path, from what the application exposed to what the panel actually displayed. This was one part of the wider MongoDB monitoring workspace.
-            </p>
+            <p>The first version sent query context through Prometheus labels so it could appear in Grafana. Each different question or result could create another time series, making that approach harder to maintain.</p>
+            <p>I changed the split: metrics track counts, latency, and outcomes; MongoDB history holds individual requests. The dashboard stays useful as the questions change.</p>
           </div>
         </div>
         <details class="technical-note">
@@ -194,29 +218,17 @@
             A closer look at the integration <span aria-hidden="true">↓</span>
           </summary>
           <div class="technical-body">
-            <h3>
-              How the two paths connect.
-            </h3>
-            <p>
-              React talks to the FastAPI application, which connects to MongoDB. For AI-assisted querying, Gemini translates the question into a MongoDB query. Monitoring follows a separate path: the backend exposes instrumentation at <code>/metrics</code>, Prometheus collects it, and Grafana produces the panels.
-            </p>
-            <h3>
-              What we instrumented.
-            </h3>
-            <p>
-              The backend tracks client query traffic with user, client, and query-type labels, alongside a packet-size histogram. A custom gauge also carries the AI query’s question, generated MongoDB query, result, and status in its labels. That is how query context reaches the dashboard through the metrics pipeline.
-            </p>
-            <h3>
-              Putting the panels in React.
-            </h3>
-            <p>
-              MetricFrame.jsx builds a Grafana panel URL from the dashboard, panel ID, and active theme. <code>Vitals.jsx</code> brings together panels for client traffic, packet-size distribution, system metrics, and query activity. I worked across that connection: exposing the application’s activity and making the resulting panels available in the workspace.
-            </p>
+            <h3>What reaches the metrics endpoint.</h3>
+            <p>The backend exports numeric counters and distributions at <code>/metrics</code>. Labels use a fixed set of categories: operation type, outcome, request direction, and route templates. A route such as <code>/api/sensor-data/{id}</code> groups document requests together without creating a separate series for each ID.</p>
+            <h3>Keeping a request inspectable.</h3>
+            <p>AI Analyst history stores the question, generated query, result, and response. I also fixed an early return that skipped successful-query bookkeeping. Persisting that history before returning lets a completed request remain available for later inspection.</p>
+            <h3>Reading the dashboard.</h3>
+            <p>Query rate counts instrumented application operations. CPU and RAM describe the machine running the backend. Response-time histograms and AI outcomes add context when activity changes; the per-request explanation remains in the application history.</p>
+            <h3>Bringing the panels into the workspace.</h3>
+            <p><code>MetricFrame.jsx</code> builds panel URLs using the active theme. <code>Vitals.jsx</code> lazily embeds a selection of panels and links to the full dashboard, so a visitor can start with the essentials and open the wider view when needed.</p>
+            <p><a class="text-link" href="https://prometheus.io/docs/practices/naming/#labels" target="_blank" rel="noreferrer">Prometheus guidance on label cardinality <span aria-hidden="true">↗</span></a></p>
           </div>
         </details>
-        <div class="source-row">
-          <span>Application source and monitoring architecture</span><a class="text-link" href="https://github.com/k-abhiram21/streamwatch" target="_blank" rel="noreferrer">StreamWatch repository <span aria-hidden="true">↗</span></a>
-        </div>
         <div class="next-page">
           <span>From observability to evaluation</span><a href="./research.html">Explore the research <span aria-hidden="true">↗</span></a>
         </div>

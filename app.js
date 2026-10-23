@@ -1,6 +1,18 @@
 (() => {
   'use strict';
 
+  const copyEmail = document.querySelector('[data-copy-email]');
+  copyEmail?.addEventListener('click', async () => {
+    const status = document.querySelector('.copy-feedback');
+    try {
+      await navigator.clipboard.writeText('abhiramkondaguduru@gmail.com');
+      copyEmail.textContent = 'Copied';
+      status.textContent = 'Email address copied.';
+    } catch {
+      status.textContent = 'Select the email address to copy it, or open it to write a message.';
+    }
+  });
+
   // A working-note link opens the relevant disclosure before the browser
   // settles on its fragment, so readers land on the detail they asked for.
   function openLinkedNote() {
@@ -13,10 +25,10 @@
 
   // Four fields show the same approach applied to different kinds of work.
   const story = [
-    { label: 'ROUTING & DECISIONS', title: 'When is a<br>specialist useful?', description: 'I work on routing: deciding when another model’s response is worth using. Knowing the topic doesn’t necessarily mean it will give a better answer.', status: '01 / ROUTING', command: 'working on', result: 'Model routing', detail: 'Choosing when to use a different response.', link: './research.html#routing', linkText: 'Read about my routing work' },
-    { label: 'DATA & OBSERVABILITY', title: 'Monitoring a<br>MongoDB app.', description: 'Our brief was to monitor an unstructured database. I worked on instrumentation and the connections between MongoDB, the application, and the Prometheus–Grafana dashboards.', status: '02 / DATA', command: 'working on', result: 'Database monitoring', detail: 'Application activity and data exploration in one workspace.', link: './streamwatch.html', linkText: 'Read about StreamWatch' },
-    { label: 'AI & RESEARCH', title: 'How much can<br>uncertainty tell us?', description: 'Repeated model answers can agree and still be wrong. I helped study how useful uncertainty signals are for detecting incorrect answers.', status: '03 / RESEARCH', command: 'working on', result: 'LLM reliability', detail: 'Studying the limits of uncertainty-based detection.', link: './research.html', linkText: 'Read the research notes' },
-    { label: 'ASSISTIVE VISION', title: 'A helmet with<br>visual cues.', description: 'Seeing how partial vision loss could make traffic difficult to notice gave me the idea for HeliVision. I led the software work and learned Raspberry Pi and computer vision while building it.', status: '04 / HARDWARE', command: 'working on', result: 'HeliVision', detail: 'A camera, vehicle detection, and display cues on a helmet.', link: './helivision.html', linkText: 'Read about HeliVision' }
+    { label: 'ROUTING & DECISIONS', title: 'When is a<br>specialist useful?', description: 'A specialist can help on one request and make another worse. I follow the decision through to the answer the system actually returns.', status: '01 / ROUTING', command: 'working on', result: 'Model routing', detail: 'Follow the choice through to the served answer.', link: './research.html#routing', linkText: 'Read about my routing work' },
+    { label: 'DATA & OBSERVABILITY', title: 'Monitoring a<br>MongoDB app.', description: 'A collection view cannot explain a slow request on its own. I connected application activity to metrics that give the investigation a starting point.', status: '02 / DATA', command: 'working on', result: 'Database monitoring', detail: 'Look at request timing alongside the data.', link: './streamwatch.html', linkText: 'Read about StreamWatch' },
+    { label: 'AI & RESEARCH', title: 'How much can<br>uncertainty tell us?', description: 'A reassuring signal can hide a wrong answer. The interesting cases are the ones that make an apparently good detector worth questioning.', status: '03 / RESEARCH', command: 'working on', result: 'LLM reliability', detail: 'Examine the cases a headline score can hide.', link: './research.html', linkText: 'Read the research notes' },
+    { label: 'ASSISTIVE VISION', title: 'A helmet with<br>visual cues.', description: 'A camera, a detector, and a display each need to work on their own. Breaking the helmet into separate processes made their connections easier to debug.', status: '04 / HARDWARE', command: 'working on', result: 'HeliVision', detail: 'Inspect each part before reconnecting the pipeline.', link: './helivision.html', linkText: 'Read about HeliVision' }
   ];
   const stepButtons = [...document.querySelectorAll('.story-steps button')];
   let activeStep = 0;
@@ -405,23 +417,13 @@
     else schedule();
   });
 
-  const projectNotes = {
-    helivision: {"label": "HELIVISION / PROJECT", "title": "Traffic cues for a limited field of view.", "description": "I’d seen how partial vision loss made vehicles on one side easy to miss. HeliVision maps detected vehicles onto a visor display and adds spoken alerts.", "href": "./helivision.html", "link": "Read the project story"},
-    streamwatch: {"label": "STREAMWATCH / PROJECT", "title": "MongoDB data and activity in one workspace.", "description": "Monitoring an unstructured database meant looking beyond its contents. StreamWatch connects data exploration with application metrics and Grafana dashboards to make the system easier to inspect.", "href": "./streamwatch.html", "link": "Read the project story"},
-    research: {"label": "LLMLENS PARADIGM / INTERNSHIP", "title": "Agreement doesn’t guarantee a correct answer.", "description": "I study the limits of uncertainty-based hallucination detection, alongside routing work that asks when another model’s response is worth using.", "href": "./research.html", "link": "Read the research notes"}
-  };
+  const projectNotes = [...document.querySelectorAll('[data-hero-note]')];
   const projectButtons = [...document.querySelectorAll('[data-hero-project]')];
   projectButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
-      const note = projectNotes[button.dataset.heroProject];
-      document.getElementById('hero-note-label').textContent = note.label;
-      document.getElementById('hero-note-title').textContent = note.title;
-      document.getElementById('hero-note-description').textContent = note.description;
-      const link = document.getElementById('hero-note-link');
-      link.href = note.href;
-      const arrow = document.createElement('span');
-      arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '↗';
-      link.replaceChildren(document.createTextNode(note.link + ' '), arrow);
+      projectNotes.forEach(note => {
+        note.hidden = note.dataset.heroNote !== button.dataset.heroProject;
+      });
       projectButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
       refreshTextMasks();
     });
