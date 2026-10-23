@@ -42,4 +42,33 @@ Phone layouts provide five fixed bottom navigation links and safe-area spacing. 
 
 The homepage opens with HeliVision selected in a three-project notebook. Its card straightens on hover or keyboard focus; on phones, scrolling it into view gradually levels it. Selected artwork also gets a small scroll-driven pixel response on phones. Reduced-motion settings remove the card motion and scroll response. Project selection supports click, tap, and arrow keys. All five pages use plain first-person explanations, with technical depth kept in the native disclosures.
 
-The About section includes an AI Research Intern role at LLMLens Paradigm (February 2026–present), within String of Pearls at K-Hub, KMIT, and a compact skills overview. Both research phases are framed as internship work. HeliVision features the team’s second prize at Prakalp-2025 and published Indian patent application 202541100066, under examination. Dates and application wording follow the owner’s confirmation, résumé, and public project README. No granted-patent or accepted-paper claim is made. Existing résumés remain outside this checkout until their public research detail and claim wording are revised.
+The About section includes an AI Research Intern role at LLMLens Paradigm (February 2026–present), within String of Pearls at K-Hub, KMIT, and a compact skills overview. Both research phases are framed as internship work. HeliVision features the team’s second prize at Prakalp-2025 and published Indian patent application 202541100066, under examination. Dates and application wording follow the owner’s confirmation, résumé, and public project README. No granted-patent or accepted-paper claim is made. The owner-approved October résumé is available at `assets/documents/abhiram-kondaguduru-resume.pdf`, linked from every header, the homepage introduction, and Contact. It is an unchanged copy of the supplied PDF.
+
+## Reading and discoverability
+
+The browser titles use Abhiram's full name and page subject. Each page declares
+its canonical GitHub Pages URL; `sitemap.xml` lists the five pages and
+`robots.txt` points to it. Update sitemap dates when the corresponding page
+content changes. These aids do not guarantee search-engine indexing.
+
+All three hero notes are authored in the initial HTML. JavaScript switches their
+visibility, refreshes pixel text masks, and updates the selected button state.
+HeliVision remains the default. Research disclosures have distinct roles:
+implementation, debugging, and evaluation. They retain the public research
+boundary rather than filling the page with private experiment details.
+
+Project source links sit immediately after each case-study introduction.
+HeliVision's outdoor walk is described as a prototype check, without invented
+accuracy or latency figures. StreamWatch distinguishes its original metrics
+approach from the cardinality tradeoff and a more suitable design for a larger
+deployment. A private maintenance checkout and regression tests are outside this
+public site; the case study does not claim that those changes are deployed.
+
+## Reading flow and contact
+
+The homepage introduces the work; project and research pages explain the motivation
+and decisions; optional notes add implementation detail. Each case study keeps a
+single contribution summary. StreamWatch explains the need to observe application
+behavior alongside flexible document data. Contact provides email, a copy-email
+control with a native fallback, LinkedIn, and the résumé download. Existing pixel,
+notebook, scroll, and diagram interactions remain in place.
