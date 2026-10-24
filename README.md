@@ -72,3 +72,38 @@ single contribution summary. StreamWatch explains the need to observe applicatio
 behavior alongside flexible document data. Contact provides email, a copy-email
 control with a native fallback, LinkedIn, and the résumé download. Existing pixel,
 notebook, scroll, and diagram interactions remain in place.
+
+## Private analytics
+
+All five pages load `analytics.js`, configured for the owner's GoatCounter account
+at `https://k-abhiram21.goatcounter.com`. Setting `endpoint` to an empty string
+disables collection. It counts only the HTTPS production host
+`k-abhiram21.github.io`; localhost, file previews,
+unrecognized pages, frames, and WebDriver sessions are excluded.
+
+The module uses GoatCounter's documented `/count` protocol, with beacon transport
+and a detached image fallback. It adds no visible elements, counters, badges, or
+dashboard links, loads no third-party JavaScript, and does not write cookies or
+browser storage. Requests use fixed page/event names, page titles, and the origin
+of an external referring site. URL query strings, fragments, link destinations,
+selected text, and form contents are not included in the payload. GoatCounter
+still receives standard request information such as IP and browser headers.
+
+The dashboard separates visits from `engagement/...` events. Events indicate a
+résumé download-link click, email/copy-email/LinkedIn/GitHub click, note opening,
+image enlargement, or a 75% scroll milestone. Each distinct event is sent at most
+once per page load. A click is intent, not proof of a completed download or sent
+message; scrolling is a reach signal, not proof that someone read the content.
+No session replay, mouse recording, or detailed time-on-page tracking is added.
+
+Keep dashboard access private and the public visitor counter disabled, and leave
+individual-pageview collection disabled. After deploying this change, visit the
+live site and check the owner's dashboard. Counts start then; past traffic
+cannot be recovered. Privacy extensions may block requests, so
+visitor numbers are estimates. Account privacy is controlled in GoatCounter,
+not by this public repository. Never put account credentials/API tokens here.
+
+To exclude the owner's production browser, set `skipgc` to `t` in localStorage
+for this site; remove the key to opt back in. The module only reads this setting.
+To change providers, replace this one module; to remove analytics, delete its
+script tag from each page. No presentation or other interaction code depends on it.
